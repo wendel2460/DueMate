@@ -10,20 +10,18 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        /* Modern, Clean Typography */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
 
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f8fafc; /* slate-50 */
-            color: #334155; /* slate-700 */
+            background-color: #f8fafc;
+            color: #334155;
             overflow-x: hidden;
             min-height: 100vh;
             margin: 0;
             -webkit-font-smoothing: antialiased;
         }
 
-        /* Elegant Inputs */
         .modern-input {
             background-color: #f1f5f9;
             border: 1px solid #e2e8f0;
@@ -32,12 +30,11 @@
         }
         .modern-input:focus {
             background-color: #ffffff;
-            border-color: #6366f1; /* indigo-500 */
+            border-color: #6366f1;
             box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
             outline: none;
         }
 
-        /* View Transitions */
         .view-section {
             display: none;
             opacity: 0;
@@ -52,7 +49,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Notifications */
         .notification {
             transform: translateX(120%);
             animation: slideInRight 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
@@ -64,13 +60,11 @@
             to { opacity: 0; transform: translateX(120%); }
         }
 
-        /* Custom Scrollbar for a premium feel */
         ::-webkit-scrollbar { width: 6px; }
         ::-webkit-scrollbar-track { background: transparent; }
         ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
         
-        /* Gradient Text Utility */
         .text-gradient {
             background: linear-gradient(135deg, #4f46e5, #3b82f6);
             -webkit-background-clip: text;
@@ -83,13 +77,13 @@
     <!-- Elegant Navigation -->
     <nav class="bg-white/80 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200 shadow-sm">
         <div class="max-w-6xl mx-auto px-5 py-4 flex justify-between items-center">
-            <div class="flex items-center gap-3 cursor-pointer group" onclick="app.switchView('home')">
+            <div class="flex items-center gap-3 cursor-pointer group" onclick="app.switchView('about')">
                 <div class="w-9 h-9 rounded-xl bg-indigo-600 flex items-center justify-center shadow-md shadow-indigo-200 group-hover:scale-105 transition-transform">
-                    <i class="fa-solid fa-leaf text-white text-lg"></i>
+                    <i class="fa-solid fa-scale-balanced text-white text-sm"></i>
                 </div>
                 <span class="font-extrabold text-xl tracking-tight text-slate-800">DueMate</span>
             </div>
-            <div class="flex items-center gap-3 md:gap-4" id="nav-actions">
+            <div class="flex items-center gap-2 md:gap-4" id="nav-actions">
                 <!-- Nav buttons injected via JS -->
             </div>
         </div>
@@ -101,8 +95,68 @@
     <!-- Main Content -->
     <main class="max-w-6xl mx-auto px-5 py-10">
         
-        <!-- 1. Home / Public List View -->
-        <section id="view-home" class="view-section active">
+        <!-- 0. About / Agreement View (Default Landing) -->
+        <section id="view-about" class="view-section active">
+            <div class="max-w-3xl mx-auto">
+                <div class="text-center space-y-4 mb-10 mt-2">
+                    <span class="px-3 py-1 bg-indigo-50 text-indigo-600 rounded-full text-sm font-semibold tracking-wide border border-indigo-100 uppercase">Terms & Conditions</span>
+                    <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 tracking-tight">
+                        Master <span class="text-gradient">Agreement</span>
+                    </h1>
+                    <p class="text-slate-500 text-lg">Strict compliance rules for all active borrowers utilizing the Atome Credit facility managed by Wendel Flores.</p>
+                </div>
+
+                <div class="space-y-6">
+                    <!-- Policy 1 -->
+                    <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 flex flex-col sm:flex-row gap-6">
+                        <div class="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-handshake-slash text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-800 mb-2">No Interest Condition</h3>
+                            <p class="text-slate-600 leading-relaxed">The lender (Wendel Flores) facilitated the loans <strong>without personal interest</strong>. All additional charges and fees come strictly from third-party (Atome) penalties. Borrowers are strictly obligated to repay their respective shares on time.</p>
+                        </div>
+                    </div>
+
+                    <!-- Policy 2 -->
+                    <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 flex flex-col sm:flex-row gap-6 relative overflow-hidden">
+                        <div class="absolute top-0 left-0 w-1.5 h-full bg-red-500"></div>
+                        <div class="w-14 h-14 rounded-2xl bg-red-50 text-red-600 flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-triangle-exclamation text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-slate-800 mb-2">Strict Penalty Clause (Atome-Based)</h3>
+                            <ul class="space-y-2 text-slate-600">
+                                <li><i class="fa-solid fa-chevron-right text-red-400 text-xs mr-2"></i><strong>Automatic Default:</strong> Failure to pay on or before the 15th of the month.</li>
+                                <li><i class="fa-solid fa-chevron-right text-red-400 text-xs mr-2"></i><strong>Daily Penalty:</strong> An additional <strong>₱20.00 per day</strong> applies after the due date until fully paid.</li>
+                                <li><i class="fa-solid fa-chevron-right text-red-400 text-xs mr-2"></i><strong>Full Liability:</strong> The borrower shoulders all penalties. The lender will not absorb any cost.</li>
+                                <li><i class="fa-solid fa-chevron-right text-red-400 text-xs mr-2"></i>If the lender is forced to advance a payment, the borrower must immediately reimburse the amount plus the ₱20/day penalty.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Policy 3 -->
+                    <div class="bg-slate-800 p-8 rounded-3xl shadow-xl flex flex-col sm:flex-row gap-6">
+                        <div class="w-14 h-14 rounded-2xl bg-slate-700 text-slate-300 flex items-center justify-center shrink-0">
+                            <i class="fa-solid fa-ban text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold text-white mb-3">Zero Excuse Policy</h3>
+                            <p class="text-slate-300 mb-4">By agreeing to these terms, borrowers accept that the following are <strong>NOT valid reasons</strong> for delayed payments:</p>
+                            <div class="grid grid-cols-2 gap-3">
+                                <div class="bg-slate-700/50 px-4 py-2 rounded-lg text-slate-200 font-medium border border-slate-600 text-center">"No GCash"</div>
+                                <div class="bg-slate-700/50 px-4 py-2 rounded-lg text-slate-200 font-medium border border-slate-600 text-center">"No money yet"</div>
+                                <div class="bg-slate-700/50 px-4 py-2 rounded-lg text-slate-200 font-medium border border-slate-600 text-center">"I forgot"</div>
+                                <div class="bg-slate-700/50 px-4 py-2 rounded-lg text-slate-200 font-medium border border-slate-600 text-center">"I'm busy"</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 1. Registry / Public List View -->
+        <section id="view-registry" class="view-section">
             <div class="text-center space-y-4 mb-12 mt-6">
                 <span class="px-3 py-1 bg-indigo-50 text-indigo-600 rounded-full text-sm font-semibold tracking-wide border border-indigo-100 uppercase">Public Registry</span>
                 <h1 class="text-4xl md:text-5xl font-extrabold text-slate-800 tracking-tight">
@@ -213,27 +267,30 @@
         import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
         import { getFirestore, collection, onSnapshot, doc, setDoc, updateDoc, addDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // --- Firebase Configuration ---
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
+        // --- Firebase Configuration (Provided by User) ---
+        const firebaseConfig = {
+            apiKey: "AIzaSyBcnvpd-W5ouCsVKqK-ivF7QtexcCWDTlI",
+            authDomain: "duemate-92575.firebaseapp.com",
+            projectId: "duemate-92575",
+            storageBucket: "duemate-92575.firebasestorage.app",
+            messagingSenderId: "346544759779",
+            appId: "1:346544759779:web:fd5609fc9cf3e7dc29f6d6",
+            measurementId: "G-WEQG6YYT72"
+        };
+        
         const firebaseApp = initializeApp(firebaseConfig);
         const auth = getAuth(firebaseApp);
         const db = getFirestore(firebaseApp);
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'duemate-default-app';
+        
+        // We will use the projectId from config as the appId to isolate the data
+        const appId = firebaseConfig.projectId;
 
-        // --- Initial Data Seed (Updated with new contracts and mathematical breakdowns) ---
+        // --- Initial Data Seed ---
         const initialUsers = [
             { schoolId: '20241659', name: 'Wendel Flores', password: 'pass123', role: 'admin', balance: 0, monthlyDue: 0 },
-            
-            // Cleofe: 2 Group Shares (339.60) + Second Loan (566.00) = 905.60. Monthly: (84.90*2) + 283.00 = 452.80
             { schoolId: '20241618', name: 'Cleofe Jane Villanueva', password: 'pass123', role: 'borrower', balance: 905.60, monthlyDue: 452.80 },
-            
-            // Earl: 1 Group Share (169.80) + TikTok Fan Loan (1257.15) = 1426.95. Monthly: 84.90 + 419.05 = 503.95
             { schoolId: '20241575', name: 'Earl Ritche T. Rojas', password: 'pass123', role: 'borrower', balance: 1426.95, monthlyDue: 503.95 },
-            
-            // Regila: 1 Group Share (169.80) + Personal Loan due Oct 31 (2200) = 2369.80. Monthly: 84.90 + 2200 = 2284.90
             { schoolId: '20242069', name: 'Regila Marie Conlu', password: 'pass123', role: 'borrower', balance: 2369.80, monthlyDue: 2284.90 },
-            
-            // The rest: 1 Group Share each (169.80 total, 84.90 monthly)
             { schoolId: '20241557', name: 'Alexis D. Tipawan', password: 'pass123', role: 'borrower', balance: 169.80, monthlyDue: 84.90 },
             { schoolId: '20241574', name: 'Rojean Mae Margate', password: 'pass123', role: 'borrower', balance: 169.80, monthlyDue: 84.90 },
             { schoolId: '20241703', name: 'Mikie Ann Peranco', password: 'pass123', role: 'borrower', balance: 169.80, monthlyDue: 84.90 },
@@ -248,7 +305,6 @@
             users: [],
             transactions: [],
 
-            // Helpers
             formatMoney: (amount) => new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(amount),
             obfuscate: (name) => {
                 if (!name) return "";
@@ -259,7 +315,6 @@
                 const container = document.getElementById('notification-container');
                 const el = document.createElement('div');
                 
-                // Elegant styling based on type
                 let icon, bgClass, borderClass, textClass;
                 if (type === 'success') {
                     icon = 'fa-circle-check text-emerald-500'; bgClass = 'bg-white'; borderClass = 'border-emerald-100'; textClass = 'text-slate-800';
@@ -304,29 +359,29 @@
             logout: () => {
                 app.currentUser = null;
                 app.notify("Successfully logged out.", "success");
-                app.switchView('home');
+                app.switchView('about'); // Return to About page on logout
             },
 
-            // Render Functions
             renderNav: () => {
                 const nav = document.getElementById('nav-actions');
                 if (!app.currentUser) {
                     nav.innerHTML = `
-                        <button onclick="app.switchView('home')" class="text-slate-500 hover:text-indigo-600 font-medium transition text-sm flex items-center gap-1.5 px-2"><i class="fa-solid fa-table-list"></i> <span class="hidden sm:inline">Registry</span></button>
-                        <button onclick="app.switchView('login')" class="text-slate-500 hover:text-indigo-600 font-medium transition text-sm flex items-center gap-1.5 px-2"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login</button>
+                        <button onclick="app.switchView('registry')" class="text-slate-500 hover:text-indigo-600 font-medium transition text-sm flex items-center gap-1.5 px-2"><i class="fa-solid fa-table-list"></i> <span class="hidden sm:inline">Registry</span></button>
+                        <button onclick="app.switchView('login')" class="text-slate-500 hover:text-indigo-600 font-medium transition text-sm flex items-center gap-1.5 px-2 border-l border-slate-200 pl-3"><i class="fa-solid fa-arrow-right-to-bracket"></i> Login</button>
                         <button onclick="app.switchView('signup')" class="bg-indigo-50 hover:bg-indigo-100 text-indigo-700 px-4 py-2 rounded-xl text-sm font-bold transition ml-1"><i class="fa-solid fa-user-plus mr-1"></i> Apply</button>
                     `;
                 } else {
                     const dashboardId = app.currentUser.role === 'admin' ? 'dashboard-admin' : 'dashboard-borrower';
                     nav.innerHTML = `
-                        <span class="text-sm font-medium text-slate-500 hidden sm:inline-block mr-2"><i class="fa-solid fa-circle-user mr-1"></i> ${app.currentUser.name.split(' ')[0]}</span>
+                        <button onclick="app.switchView('registry')" class="text-slate-500 hover:text-indigo-600 font-medium transition text-sm flex items-center gap-1.5 px-2"><i class="fa-solid fa-table-list"></i> <span class="hidden sm:inline">Registry</span></button>
+                        <span class="text-sm font-medium text-slate-500 hidden sm:inline-block mx-2 border-l border-slate-200 pl-3"><i class="fa-solid fa-circle-user mr-1"></i> ${app.currentUser.name.split(' ')[0]}</span>
                         <button onclick="app.switchView('${dashboardId}')" class="text-indigo-600 hover:text-indigo-800 font-bold transition text-sm flex items-center gap-1.5 px-2"><i class="fa-solid fa-chart-pie"></i> Dashboard</button>
                         <button onclick="app.logout()" class="text-red-500 hover:text-red-700 bg-red-50 hover:bg-red-100 px-4 py-2 rounded-xl text-sm font-bold transition ml-1"><i class="fa-solid fa-power-off mr-1"></i> Logout</button>
                     `;
                 }
             },
 
-            renderHome: () => {
+            renderRegistry: () => {
                 const tbody = document.getElementById('public-list-body');
                 const borrowers = app.users.filter(u => u.role === 'borrower' && u.balance > 0);
                 
@@ -367,7 +422,6 @@
                     </div>
 
                     <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 mb-8">
-                        <!-- Premium Balance Card -->
                         <div class="lg:col-span-2 bg-gradient-to-br from-indigo-600 to-blue-700 p-8 rounded-3xl shadow-xl shadow-indigo-200 relative overflow-hidden text-white group">
                             <div class="absolute -right-10 -top-10 w-48 h-48 bg-white/10 rounded-full blur-2xl group-hover:bg-white/20 transition duration-700"></div>
                             <h3 class="text-indigo-100 text-sm font-semibold uppercase tracking-widest mb-3">Total Liability</h3>
@@ -385,10 +439,7 @@
                             </div>
                         </div>
 
-                        <!-- Actions Cards -->
                         <div class="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 gap-6">
-                            
-                            <!-- Payment Box -->
                             <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 flex flex-col justify-between">
                                 <div>
                                     <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-4">
@@ -403,7 +454,6 @@
                                 </form>
                             </div>
 
-                            <!-- Loan Box -->
                             <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 flex flex-col justify-between">
                                 <div>
                                     <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-4">
@@ -417,11 +467,9 @@
                                     <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 rounded-xl font-bold transition shadow-sm">Apply</button>
                                 </form>
                             </div>
-
                         </div>
                     </div>
 
-                    <!-- Ledger -->
                     <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200">
                         <h3 class="text-lg font-bold text-slate-800 mb-6 flex items-center gap-2"><i class="fa-solid fa-clock-rotate-left text-slate-400"></i> Transaction Ledger</h3>
                         <div class="space-y-4">
@@ -472,8 +520,6 @@
                     </div>
 
                     <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                        
-                        <!-- Pending Actions -->
                         <div class="lg:col-span-1 space-y-5">
                             <h3 class="font-bold text-xl text-slate-800 flex items-center gap-2"><i class="fa-solid fa-inbox text-slate-400"></i> Pending Review</h3>
                             ${pending.length === 0 ? `
@@ -501,7 +547,6 @@
                             `).join('')}
                         </div>
 
-                        <!-- Master List -->
                         <div class="lg:col-span-2">
                             <h3 class="font-bold text-xl text-slate-800 mb-5 flex items-center gap-2"><i class="fa-solid fa-address-book text-slate-400"></i> Master Registry</h3>
                             <div class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
@@ -537,8 +582,6 @@
                     </div>
                 `;
             },
-
-            // --- Logic & Database Handlers ---
 
             editName: async () => {
                 const newName = prompt("Enter new display name:", app.currentUser.name);
@@ -696,11 +739,8 @@
         // --- Init & Data Fetching ---
         const init = async () => {
             try {
-                if (typeof __initial_auth_token !== 'undefined' && __initial_auth_token) {
-                    await signInWithCustomToken(auth, __initial_auth_token);
-                } else {
-                    await signInAnonymously(auth);
-                }
+                // Initialize Firebase Auth Anonymously
+                await signInAnonymously(auth);
             } catch (e) { console.error("Auth:", e); }
 
             onAuthStateChanged(auth, (user) => {
@@ -722,7 +762,7 @@
                             const updated = data.find(u => u.schoolId === app.currentUser.schoolId);
                             if (updated) app.currentUser = updated;
                         }
-                        app.renderHome();
+                        app.renderRegistry();
                         if (app.currentUser?.role === 'admin') app.renderAdminDashboard();
                         if (app.currentUser?.role === 'borrower') app.renderBorrowerDashboard();
                     }

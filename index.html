@@ -282,21 +282,7 @@
         const auth = getAuth(firebaseApp);
         const db = getFirestore(firebaseApp);
         
-        // We will use the projectId from config as the appId to isolate the data
         const appId = firebaseConfig.projectId;
-
-        // --- Initial Data Seed ---
-        const initialUsers = [
-            { schoolId: '20241659', name: 'Wendel Flores', password: 'pass123', role: 'admin', balance: 0, monthlyDue: 0 },
-            { schoolId: '20241618', name: 'Cleofe Jane Villanueva', password: 'pass123', role: 'borrower', balance: 905.60, monthlyDue: 452.80 },
-            { schoolId: '20241575', name: 'Earl Ritche T. Rojas', password: 'pass123', role: 'borrower', balance: 1426.95, monthlyDue: 503.95 },
-            { schoolId: '20242069', name: 'Regila Marie Conlu', password: 'pass123', role: 'borrower', balance: 2369.80, monthlyDue: 2284.90 },
-            { schoolId: '20241557', name: 'Alexis D. Tipawan', password: 'pass123', role: 'borrower', balance: 169.80, monthlyDue: 84.90 },
-            { schoolId: '20241574', name: 'Rojean Mae Margate', password: 'pass123', role: 'borrower', balance: 169.80, monthlyDue: 84.90 },
-            { schoolId: '20241703', name: 'Mikie Ann Peranco', password: 'pass123', role: 'borrower', balance: 169.80, monthlyDue: 84.90 },
-            { schoolId: '20241705', name: 'Jaderic Saldua', password: 'pass123', role: 'borrower', balance: 169.80, monthlyDue: 84.90 },
-            { schoolId: '20241735', name: 'Cindy Mae Tabusares', password: 'pass123', role: 'borrower', balance: 169.80, monthlyDue: 84.90 },
-        ];
 
         // --- Application State ---
         window.app = {
@@ -359,7 +345,7 @@
             logout: () => {
                 app.currentUser = null;
                 app.notify("Successfully logged out.", "success");
-                app.switchView('about'); // Return to About page on logout
+                app.switchView('about'); 
             },
 
             renderNav: () => {
@@ -750,22 +736,16 @@
                 // Subscribe to Users
                 const usersRef = collection(db, 'artifacts', appId, 'public', 'data', 'app_users');
                 onSnapshot(usersRef, (snap) => {
-                    const data = snap.docs.map(d => ({id: d.id, ...d.data()}));
+                    app.users = snap.docs.map(d => ({id: d.id, ...d.data()}));
                     
-                    if (data.length === 0) {
-                        initialUsers.forEach(async (u) => {
-                            await setDoc(doc(usersRef, u.schoolId), u);
-                        });
-                    } else {
-                        app.users = data;
-                        if (app.currentUser) {
-                            const updated = data.find(u => u.schoolId === app.currentUser.schoolId);
-                            if (updated) app.currentUser = updated;
-                        }
-                        app.renderRegistry();
-                        if (app.currentUser?.role === 'admin') app.renderAdminDashboard();
-                        if (app.currentUser?.role === 'borrower') app.renderBorrowerDashboard();
+                    if (app.currentUser) {
+                        const updated = app.users.find(u => u.schoolId === app.currentUser.schoolId);
+                        if (updated) app.currentUser = updated;
                     }
+                    app.renderRegistry();
+                    if (app.currentUser?.role === 'admin') app.renderAdminDashboard();
+                    if (app.currentUser?.role === 'borrower') app.renderBorrowerDashboard();
+                    
                 }, (error) => console.error("Firestore user error:", error));
 
                 // Subscribe to Transactions

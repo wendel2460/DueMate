@@ -70,6 +70,13 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
+
+        /* Modal Styles */
+        .modal-overlay {
+            backdrop-filter: blur(8px);
+            animation: fadeIn 0.2s ease-out;
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
     </style>
 </head>
 <body>
@@ -95,7 +102,7 @@
     <!-- Main Content -->
     <main class="max-w-6xl mx-auto px-5 py-10">
         
-        <!-- 0. About / Agreement View (Default Landing) -->
+        <!-- 0. About / Agreement View -->
         <section id="view-about" class="view-section active">
             <div class="max-w-3xl mx-auto">
                 <div class="text-center space-y-4 mb-10 mt-2">
@@ -107,7 +114,6 @@
                 </div>
 
                 <div class="space-y-6">
-                    <!-- Policy 1 -->
                     <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 flex flex-col sm:flex-row gap-6">
                         <div class="w-14 h-14 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center shrink-0">
                             <i class="fa-solid fa-handshake-slash text-2xl"></i>
@@ -118,7 +124,6 @@
                         </div>
                     </div>
 
-                    <!-- Policy 2 -->
                     <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 flex flex-col sm:flex-row gap-6 relative overflow-hidden">
                         <div class="absolute top-0 left-0 w-1.5 h-full bg-red-500"></div>
                         <div class="w-14 h-14 rounded-2xl bg-red-50 text-red-600 flex items-center justify-center shrink-0">
@@ -135,7 +140,6 @@
                         </div>
                     </div>
 
-                    <!-- Policy 3 -->
                     <div class="bg-slate-800 p-8 rounded-3xl shadow-xl flex flex-col sm:flex-row gap-6">
                         <div class="w-14 h-14 rounded-2xl bg-slate-700 text-slate-300 flex items-center justify-center shrink-0">
                             <i class="fa-solid fa-ban text-2xl"></i>
@@ -155,7 +159,7 @@
             </div>
         </section>
 
-        <!-- 1. Registry / Public List View -->
+        <!-- 1. Registry View -->
         <section id="view-registry" class="view-section">
             <div class="text-center space-y-4 mb-12 mt-6">
                 <span class="px-3 py-1 bg-indigo-50 text-indigo-600 rounded-full text-sm font-semibold tracking-wide border border-indigo-100 uppercase">Public Registry</span>
@@ -183,45 +187,50 @@
             </div>
         </section>
 
-        <!-- 2. Login View -->
+        <!-- 2. Enhanced Login View -->
         <section id="view-login" class="view-section">
-            <div class="max-w-md mx-auto bg-white p-8 md:p-10 rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100 mt-12 relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-full h-1.5 bg-indigo-600"></div>
-                <div class="flex justify-center mb-6">
-                    <div class="w-16 h-16 rounded-full bg-indigo-50 flex items-center justify-center border border-indigo-100 text-indigo-600 text-2xl">
-                        <i class="fa-solid fa-lock"></i>
+            <div class="max-w-md mx-auto bg-white p-8 md:p-10 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-slate-100 mt-12 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-indigo-600 to-blue-500"></div>
+                
+                <div class="relative w-24 h-24 mx-auto mb-6">
+                    <div class="absolute inset-0 bg-indigo-500 rounded-full blur-xl opacity-20 animate-pulse"></div>
+                    <div class="relative w-full h-full rounded-2xl bg-gradient-to-tr from-indigo-600 to-blue-500 flex items-center justify-center shadow-lg shadow-indigo-200 rotate-3 transition-transform hover:rotate-6">
+                        <i class="fa-solid fa-fingerprint text-white text-4xl"></i>
                     </div>
                 </div>
-                <h2 class="text-2xl font-bold text-center mb-6 text-slate-800">Secure Access</h2>
+
+                <h2 class="text-3xl font-extrabold text-center mb-2 text-slate-800 tracking-tight">Welcome Back</h2>
+                <p class="text-center text-slate-500 mb-8 text-sm">Enter your credentials to access your portal</p>
+                
                 <div id="login-error" class="hidden bg-red-50 border border-red-100 text-red-600 p-3 rounded-xl mb-6 text-sm text-center font-medium"></div>
                 
                 <form id="login-form" class="space-y-5">
                     <div>
-                        <label class="block text-sm font-medium text-slate-600 mb-1.5">School ID</label>
-                        <input type="text" id="login-id" required class="w-full p-3.5 modern-input rounded-xl text-base" placeholder="e.g. 20241618">
+                        <label class="block text-sm font-semibold text-slate-600 mb-1.5">School ID</label>
+                        <input type="text" id="login-id" required class="w-full p-4 modern-input rounded-xl text-base font-medium" placeholder="e.g. 20241618">
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-slate-600 mb-1.5">Password</label>
-                        <input type="password" id="login-pass" required class="w-full p-3.5 modern-input rounded-xl text-base" placeholder="••••••••">
+                        <label class="block text-sm font-semibold text-slate-600 mb-1.5">Password</label>
+                        <input type="password" id="login-pass" required class="w-full p-4 modern-input rounded-xl text-base font-medium" placeholder="••••••••">
                     </div>
-                    <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3.5 px-4 rounded-xl transition-colors shadow-sm mt-2">
-                        Log In
+                    <button type="submit" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-4 px-4 rounded-xl transition-colors shadow-lg shadow-slate-200 mt-4 flex items-center justify-center gap-2">
+                        <span>Secure Login</span> <i class="fa-solid fa-arrow-right"></i>
                     </button>
                 </form>
             </div>
         </section>
 
-        <!-- 3. Signup / Apply View -->
+        <!-- 3. Enhanced Signup View -->
         <section id="view-signup" class="view-section">
-            <div class="max-w-md mx-auto bg-white p-8 md:p-10 rounded-3xl shadow-xl shadow-slate-200/50 border border-slate-100 mt-12 relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-full h-1.5 bg-emerald-500"></div>
+            <div class="max-w-md mx-auto bg-white p-8 md:p-10 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-slate-100 mt-12 relative overflow-hidden">
+                <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-emerald-500 to-teal-500"></div>
                 <div class="flex justify-center mb-6">
-                    <div class="w-16 h-16 rounded-full bg-emerald-50 flex items-center justify-center border border-emerald-100 text-emerald-500 text-2xl">
-                        <i class="fa-solid fa-user-plus"></i>
+                    <div class="w-20 h-20 rounded-2xl bg-emerald-50 flex items-center justify-center border border-emerald-100 text-emerald-500 text-3xl shadow-inner">
+                        <i class="fa-solid fa-id-card-clip"></i>
                     </div>
                 </div>
-                <h2 class="text-2xl font-bold text-center mb-2 text-slate-800">Create Account</h2>
-                <p class="text-center text-slate-500 mb-8 text-sm">Register your ID to request or track a loan.</p>
+                <h2 class="text-2xl font-bold text-center mb-2 text-slate-800">Account Setup</h2>
+                <p class="text-center text-slate-500 mb-8 text-sm">Register your details accurately to proceed.</p>
                 
                 <div id="signup-error" class="hidden bg-red-50 border border-red-100 text-red-600 p-3 rounded-xl mb-6 text-sm text-center font-medium"></div>
                 
@@ -230,20 +239,26 @@
                         <label class="block text-sm font-medium text-slate-600 mb-1.5">School ID</label>
                         <input type="text" id="signup-id" required class="w-full p-3.5 modern-input rounded-xl text-base" placeholder="2024XXXX">
                     </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-600 mb-1.5">First Name</label>
+                            <input type="text" id="signup-fname" required class="w-full p-3.5 modern-input rounded-xl text-base" placeholder="First">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-600 mb-1.5">Middle Name</label>
+                            <input type="text" id="signup-mname" class="w-full p-3.5 modern-input rounded-xl text-base" placeholder="(Optional)">
+                        </div>
+                    </div>
                     <div>
-                        <label class="block text-sm font-medium text-slate-600 mb-1.5">Full Name</label>
-                        <input type="text" id="signup-name" required class="w-full p-3.5 modern-input rounded-xl text-base" placeholder="First Last">
+                        <label class="block text-sm font-medium text-slate-600 mb-1.5">Last Name</label>
+                        <input type="text" id="signup-lname" required class="w-full p-3.5 modern-input rounded-xl text-base" placeholder="Last">
                     </div>
                     <div>
                         <label class="block text-sm font-medium text-slate-600 mb-1.5">Default Password</label>
                         <input type="text" id="signup-pass" required value="pass123" class="w-full p-3.5 modern-input rounded-xl text-base text-slate-400" readonly>
                     </div>
-                    <div>
-                        <label class="block text-sm font-medium text-slate-600 mb-1.5">Initial Loan Request (₱)</label>
-                        <input type="number" id="signup-amount" class="w-full p-3.5 modern-input rounded-xl text-base" placeholder="0.00 (Optional)">
-                    </div>
-                    <button type="submit" class="w-full mt-6 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold py-3.5 px-4 rounded-xl transition-colors shadow-sm">
-                        Register & Apply
+                    <button type="submit" class="w-full mt-6 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 px-4 rounded-xl transition-colors shadow-lg shadow-emerald-200">
+                        Register Account
                     </button>
                 </form>
             </div>
@@ -261,13 +276,18 @@
 
     </main>
 
+    <!-- Modal Container for Admin Processing -->
+    <div id="admin-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-slate-900/60 modal-overlay p-4">
+        <!-- Content injected via JS -->
+    </div>
+
     <!-- App Logic -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
         import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, collection, onSnapshot, doc, setDoc, updateDoc, addDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
+        import { getFirestore, collection, onSnapshot, doc, setDoc, updateDoc, addDoc, deleteDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-        // --- Firebase Configuration (Provided by User) ---
+        // --- Firebase Configuration ---
         const firebaseConfig = {
             apiKey: "AIzaSyBcnvpd-W5ouCsVKqK-ivF7QtexcCWDTlI",
             authDomain: "duemate-92575.firebaseapp.com",
@@ -281,17 +301,17 @@
         const firebaseApp = initializeApp(firebaseConfig);
         const auth = getAuth(firebaseApp);
         const db = getFirestore(firebaseApp);
-        
         const appId = firebaseConfig.projectId;
 
-        // --- Application State ---
+        // --- Application State & Functions ---
         window.app = {
             firebaseUser: null,
             currentUser: null,
             users: [],
             transactions: [],
+            processingTxId: null, // Holds ID for admin review modal
 
-            formatMoney: (amount) => new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(amount),
+            formatMoney: (amount) => new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(amount || 0),
             obfuscate: (name) => {
                 if (!name) return "";
                 return name.split(' ').map(w => w.length <= 2 ? w : w[0] + '*'.repeat(w.length - 2) + w[w.length - 1]).join(' ');
@@ -300,7 +320,6 @@
             notify: (msg, type='info') => {
                 const container = document.getElementById('notification-container');
                 const el = document.createElement('div');
-                
                 let icon, bgClass, borderClass, textClass;
                 if (type === 'success') {
                     icon = 'fa-circle-check text-emerald-500'; bgClass = 'bg-white'; borderClass = 'border-emerald-100'; textClass = 'text-slate-800';
@@ -318,7 +337,6 @@
                     <p class="text-sm font-medium ${textClass}">${msg}</p>
                 `;
                 container.appendChild(el);
-                
                 setTimeout(() => {
                     el.style.animation = 'fadeOut 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards';
                     setTimeout(() => el.remove(), 400);
@@ -333,7 +351,7 @@
                 const target = document.getElementById(`view-${viewId}`);
                 if(target) {
                     target.classList.add('active');
-                    void target.offsetWidth; // Trigger reflow
+                    void target.offsetWidth; 
                     target.style.animation = 'slideUpFade 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards';
                 }
                 app.renderNav();
@@ -390,10 +408,28 @@
                 `).join('');
             },
 
+            // --- BORROWER DASHBOARD ---
+            togglePayMethod: () => {
+                const method = document.getElementById('pay-method').value;
+                document.getElementById('pay-qr-fields').style.display = method === 'qr' ? 'block' : 'none';
+                document.getElementById('pay-cash-fields').style.display = method === 'cash' ? 'block' : 'none';
+            },
+
             renderBorrowerDashboard: () => {
                 const container = document.getElementById('borrower-content');
                 const u = app.currentUser;
                 const myTx = app.transactions.filter(t => t.schoolId === u.schoolId);
+
+                // Date logic for forecast
+                const today = new Date();
+                let dueMonth = today.getMonth();
+                let dueYear = today.getFullYear();
+                if (today.getDate() > 15) {
+                    dueMonth++;
+                    if(dueMonth > 11) { dueMonth = 0; dueYear++; }
+                }
+                const nextDueDate = new Date(dueYear, dueMonth, 15);
+                const isLate = today.getDate() > 15 && u.balance > 0;
 
                 container.innerHTML = `
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-10">
@@ -401,7 +437,6 @@
                             <span class="text-xs font-bold uppercase tracking-widest text-indigo-500 mb-1 block">Borrower Dashboard</span>
                             <h2 class="text-3xl font-extrabold text-slate-800 flex items-center gap-3">
                                 <span id="display-name">${u.name}</span>
-                                <button onclick="app.editName()" class="text-sm bg-slate-100 hover:bg-slate-200 text-slate-600 px-3 py-1 rounded-full transition flex items-center gap-1.5 font-medium"><i class="fa-solid fa-pen text-xs"></i> Edit</button>
                             </h2>
                             <p class="text-slate-500 mt-2 text-sm">ID: ${u.schoolId} &bull; Strict Compliance Status: <span class="text-emerald-600 font-semibold"><i class="fa-solid fa-circle-check text-xs"></i> Active</span></p>
                         </div>
@@ -414,43 +449,74 @@
                             <div class="mb-8">
                                 <p class="text-5xl font-extrabold tracking-tight">${app.formatMoney(u.balance)}</p>
                             </div>
-                            <div class="bg-black/10 rounded-2xl p-5 flex justify-between items-center backdrop-blur-sm border border-white/10">
+                            <div class="bg-black/10 rounded-2xl p-5 flex justify-between items-center backdrop-blur-sm border border-white/10 mb-3">
                                 <div>
                                     <p class="text-2xl font-bold">${app.formatMoney(u.monthlyDue)}</p>
                                     <p class="text-indigo-200 text-xs mt-1 font-medium">Monthly Due Amount</p>
                                 </div>
                                 <div class="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center">
-                                    <i class="fa-regular fa-calendar-check text-2xl text-white"></i>
+                                    <i class="fa-solid fa-money-bills text-xl text-white"></i>
                                 </div>
                             </div>
+                            
+                            <!-- Duedate Forecast -->
+                            <div class="bg-white/10 rounded-xl p-4 flex items-center gap-3 border border-white/20 ${isLate ? 'border-red-400 bg-red-500/20' : ''}">
+                                <i class="fa-regular fa-calendar-xmark text-2xl ${isLate ? 'text-red-200 animate-pulse' : 'text-indigo-200'}"></i>
+                                <div>
+                                    <p class="text-xs font-semibold uppercase tracking-wider text-indigo-100">Next Due Date</p>
+                                    <p class="font-bold text-lg">${nextDueDate.toLocaleDateString('en-US', {month: 'long', day:'numeric', year:'numeric'})}</p>
+                                </div>
+                            </div>
+                            ${isLate ? `<p class="text-xs text-red-200 mt-2 font-medium bg-red-900/40 p-2 rounded-lg text-center"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Late Penalty (+₱20/day) may be applying.</p>` : ''}
                         </div>
 
-                        <div class="lg:col-span-3 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        <div class="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-6">
+                            <!-- Payment Form -->
                             <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 flex flex-col justify-between">
                                 <div>
                                     <div class="w-10 h-10 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center mb-4">
                                         <i class="fa-solid fa-wallet text-lg"></i>
                                     </div>
                                     <h3 class="font-bold text-slate-800 text-lg mb-1">Make a Payment</h3>
-                                    <p class="text-sm text-slate-500 mb-5 leading-relaxed">Submit your payment. Requires admin verification. Late fee is +₱20/day.</p>
+                                    <p class="text-sm text-slate-500 mb-5 leading-relaxed">Submit your payment details for admin verification.</p>
                                 </div>
-                                <form onsubmit="app.submitPayment(event)" class="flex gap-2">
-                                    <input type="number" id="pay-amt" required class="w-full p-3 modern-input rounded-xl font-medium" placeholder="Amount (₱)">
-                                    <button type="submit" class="bg-emerald-600 hover:bg-emerald-700 text-white px-5 rounded-xl font-bold transition shadow-sm">Pay</button>
+                                <form onsubmit="app.submitPayment(event)" class="space-y-3">
+                                    <div class="flex gap-2">
+                                        <input type="number" id="pay-amt" required class="w-1/2 p-3 modern-input rounded-xl font-medium" placeholder="Amount (₱)">
+                                        <select id="pay-method" onchange="app.togglePayMethod()" class="w-1/2 p-3 modern-input rounded-xl font-medium cursor-pointer">
+                                            <option value="qr">QR (GCash)</option>
+                                            <option value="cash">Cash</option>
+                                        </select>
+                                    </div>
+                                    <div id="pay-qr-fields">
+                                        <input type="text" id="pay-ref" class="w-full p-3 modern-input rounded-xl font-medium text-sm" placeholder="GCash Ref. Number" required>
+                                    </div>
+                                    <div id="pay-cash-fields" style="display:none;">
+                                        <input type="text" id="pay-to" class="w-full p-3 modern-input rounded-xl font-medium text-sm" placeholder="Paid to whom? (Name)">
+                                    </div>
+                                    <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl font-bold transition shadow-sm mt-2">Submit Payment</button>
                                 </form>
                             </div>
 
+                            <!-- Loan Form -->
                             <div class="bg-white p-6 rounded-3xl shadow-sm border border-slate-200 flex flex-col justify-between">
                                 <div>
                                     <div class="w-10 h-10 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center mb-4">
                                         <i class="fa-solid fa-hand-holding-dollar text-lg"></i>
                                     </div>
                                     <h3 class="font-bold text-slate-800 text-lg mb-1">Request a Loan</h3>
-                                    <p class="text-sm text-slate-500 mb-5 leading-relaxed">Apply for an additional amount. Requires approval and agreement signing.</p>
                                 </div>
-                                <form onsubmit="app.submitLoan(event)" class="flex gap-2">
-                                    <input type="number" id="loan-amt" required class="w-full p-3 modern-input rounded-xl font-medium" placeholder="Amount (₱)">
-                                    <button type="submit" class="bg-indigo-600 hover:bg-indigo-700 text-white px-5 rounded-xl font-bold transition shadow-sm">Apply</button>
+                                <form onsubmit="app.submitLoan(event)" class="space-y-3 mt-4">
+                                    <div class="flex gap-2">
+                                        <input type="number" id="loan-amt" required class="w-1/2 p-3 modern-input rounded-xl font-medium" placeholder="Amount (₱)">
+                                        <select id="loan-months" class="w-1/2 p-3 modern-input rounded-xl font-medium cursor-pointer">
+                                            <option value="1">1 Month</option>
+                                            <option value="2">2 Months</option>
+                                            <option value="3">3 Months</option>
+                                        </select>
+                                    </div>
+                                    <textarea id="loan-reason" required class="w-full p-3 modern-input rounded-xl font-medium text-sm resize-none" rows="2" placeholder="State your reason..."></textarea>
+                                    <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white py-3 rounded-xl font-bold transition shadow-sm mt-2">Apply for Loan</button>
                                 </form>
                             </div>
                         </div>
@@ -467,7 +533,10 @@
                                         </div>
                                         <div>
                                             <p class="font-bold text-slate-800">${tx.type === 'payment' ? 'Payment Submitted' : 'Loan Requested'}</p>
-                                            <p class="text-xs font-medium text-slate-500 mt-0.5">${new Date(tx.date).toLocaleString([], {year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute:'2-digit'})}</p>
+                                            <p class="text-xs font-medium text-slate-500 mt-0.5 mb-1">${new Date(tx.date).toLocaleString([], {month: 'short', day: 'numeric', hour: '2-digit', minute:'2-digit'})}</p>
+                                            ${tx.method === 'qr' ? `<span class="text-[10px] bg-slate-200 text-slate-600 px-2 py-0.5 rounded font-mono">Ref: ${tx.reference}</span>` : ''}
+                                            ${tx.method === 'cash' ? `<span class="text-[10px] bg-slate-200 text-slate-600 px-2 py-0.5 rounded font-mono">Cash to: ${tx.paidTo}</span>` : ''}
+                                            ${tx.months ? `<span class="text-[10px] bg-indigo-100 text-indigo-600 px-2 py-0.5 rounded font-bold">${tx.months} Mos.</span>` : ''}
                                         </div>
                                     </div>
                                     <div class="text-right">
@@ -484,9 +553,11 @@
                 `;
             },
 
+            // --- ADMIN DASHBOARD ---
             renderAdminDashboard: () => {
                 const container = document.getElementById('admin-content');
                 const pending = app.transactions.filter(t => t.status === 'pending');
+                const approved = app.transactions.filter(t => t.status === 'approved').slice(0, 10); // Show last 10
                 const borrowers = app.users.filter(u => u.role === 'borrower');
                 const totalOut = borrowers.reduce((sum, u) => sum + u.balance, 0);
 
@@ -505,36 +576,61 @@
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                        <div class="lg:col-span-1 space-y-5">
-                            <h3 class="font-bold text-xl text-slate-800 flex items-center gap-2"><i class="fa-solid fa-inbox text-slate-400"></i> Pending Review</h3>
-                            ${pending.length === 0 ? `
-                                <div class="bg-white border border-slate-200 border-dashed p-10 rounded-3xl text-center shadow-sm">
-                                    <div class="w-16 h-16 mx-auto bg-slate-50 rounded-full flex items-center justify-center mb-4 text-slate-300">
-                                        <i class="fa-solid fa-check-double text-2xl"></i>
-                                    </div>
-                                    <p class="text-slate-500 font-medium">All clear. No pending items.</p>
-                                </div>
-                            ` : pending.map(tx => `
-                                <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm relative overflow-hidden group">
-                                    <div class="absolute left-0 top-0 w-1.5 h-full ${tx.type === 'payment' ? 'bg-emerald-500' : 'bg-indigo-500'}"></div>
-                                    <div class="flex justify-between items-start mb-5 pl-2">
-                                        <div>
-                                            <p class="font-bold text-slate-800 text-lg">${tx.userName}</p>
-                                            <p class="text-xs font-semibold uppercase tracking-wider text-slate-500 mt-1">${tx.type === 'payment' ? 'Payment Validation' : 'Loan Request'}</p>
+                    <div class="grid grid-cols-1 xl:grid-cols-3 gap-8">
+                        <div class="xl:col-span-1 space-y-8">
+                            <!-- Pending Reviews -->
+                            <div>
+                                <h3 class="font-bold text-xl text-slate-800 flex items-center gap-2 mb-5"><i class="fa-solid fa-inbox text-slate-400"></i> Pending Review</h3>
+                                <div class="space-y-4">
+                                ${pending.length === 0 ? `
+                                    <div class="bg-white border border-slate-200 border-dashed p-8 rounded-3xl text-center shadow-sm">
+                                        <div class="w-12 h-12 mx-auto bg-slate-50 rounded-full flex items-center justify-center mb-3 text-slate-300">
+                                            <i class="fa-solid fa-check-double text-xl"></i>
                                         </div>
-                                        <p class="font-black text-xl ${tx.type === 'payment' ? 'text-emerald-600' : 'text-indigo-600'}">${app.formatMoney(tx.amount)}</p>
+                                        <p class="text-slate-500 font-medium text-sm">All clear. No pending items.</p>
                                     </div>
-                                    <button onclick="app.approveAction('${tx.id}', '${tx.type}')" 
-                                        class="w-full bg-slate-50 hover:bg-indigo-50 border border-slate-200 hover:border-indigo-200 text-slate-700 hover:text-indigo-700 py-3 rounded-xl text-sm font-bold transition-all flex items-center justify-center gap-2">
-                                        <i class="fa-solid fa-check"></i> Approve & Process
-                                    </button>
+                                ` : pending.map(tx => `
+                                    <div class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm relative overflow-hidden group">
+                                        <div class="absolute left-0 top-0 w-1.5 h-full ${tx.type === 'payment' ? 'bg-emerald-500' : 'bg-indigo-500'}"></div>
+                                        <div class="flex justify-between items-start mb-4 pl-2">
+                                            <div>
+                                                <p class="font-bold text-slate-800 text-lg">${tx.userName}</p>
+                                                <p class="text-xs font-semibold uppercase tracking-wider text-slate-500 mt-1 mb-2">${tx.type === 'payment' ? 'Payment Validation' : 'Loan Request'}</p>
+                                                ${tx.type === 'loan_request' ? `<p class="text-xs text-slate-600 italic border-l-2 border-indigo-200 pl-2">"${tx.reason || 'No reason'}"</p>` : ''}
+                                                ${tx.method === 'qr' ? `<p class="text-xs text-slate-600 font-mono mt-1">Ref: ${tx.reference}</p>` : ''}
+                                                ${tx.method === 'cash' ? `<p class="text-xs text-slate-600 mt-1">Cash to: ${tx.paidTo}</p>` : ''}
+                                            </div>
+                                            <p class="font-black text-xl ${tx.type === 'payment' ? 'text-emerald-600' : 'text-indigo-600'}">${app.formatMoney(tx.amount)}</p>
+                                        </div>
+                                        <button onclick="app.openAdminModal('${tx.id}')" 
+                                            class="w-full bg-slate-50 hover:bg-indigo-50 border border-slate-200 hover:border-indigo-200 text-slate-700 hover:text-indigo-700 py-3 rounded-xl text-sm font-bold transition-all flex items-center justify-center gap-2">
+                                            <i class="fa-solid fa-file-signature"></i> Review & Process
+                                        </button>
+                                    </div>
+                                `).join('')}
                                 </div>
-                            `).join('')}
+                            </div>
+
+                            <!-- Approved History -->
+                            <div>
+                                <h3 class="font-bold text-xl text-slate-800 flex items-center gap-2 mb-5"><i class="fa-solid fa-clock-rotate-left text-slate-400"></i> Recent Approvals</h3>
+                                <div class="bg-white rounded-3xl shadow-sm border border-slate-200 p-4 space-y-2">
+                                    ${approved.length === 0 ? '<p class="text-slate-400 text-sm text-center py-4">No history yet.</p>' : approved.map(tx => `
+                                        <div class="flex justify-between items-center p-3 hover:bg-slate-50 rounded-xl transition border-b border-slate-50 last:border-0">
+                                            <div>
+                                                <p class="font-bold text-slate-700 text-sm">${tx.userName}</p>
+                                                <p class="text-[10px] text-slate-400 uppercase font-semibold">${tx.type} • ${new Date(tx.date).toLocaleDateString()}</p>
+                                            </div>
+                                            <p class="font-bold ${tx.type === 'payment' ? 'text-emerald-600' : 'text-indigo-600'} text-sm">${app.formatMoney(tx.amount)}</p>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
                         </div>
 
-                        <div class="lg:col-span-2">
-                            <h3 class="font-bold text-xl text-slate-800 mb-5 flex items-center gap-2"><i class="fa-solid fa-address-book text-slate-400"></i> Master Registry</h3>
+                        <!-- Master Registry -->
+                        <div class="xl:col-span-2">
+                            <h3 class="font-bold text-xl text-slate-800 mb-5 flex items-center gap-2"><i class="fa-solid fa-address-book text-slate-400"></i> Master Registry (Direct Edit)</h3>
                             <div class="bg-white rounded-3xl shadow-sm border border-slate-200 overflow-hidden">
                                 <div class="overflow-x-auto">
                                     <table class="w-full text-left border-collapse">
@@ -543,6 +639,7 @@
                                                 <th class="p-5">Borrower Details</th>
                                                 <th class="p-5 text-right">Balance</th>
                                                 <th class="p-5 text-right">Monthly</th>
+                                                <th class="p-5 text-center">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -558,6 +655,11 @@
                                                         </span>
                                                     </td>
                                                     <td class="p-5 text-right font-medium text-slate-500">${app.formatMoney(u.monthlyDue)}</td>
+                                                    <td class="p-5 text-center">
+                                                        <button onclick="app.directEditUser('${u.schoolId}')" class="bg-slate-100 hover:bg-indigo-100 text-slate-600 hover:text-indigo-600 px-3 py-1.5 rounded-lg text-xs font-bold transition">
+                                                            <i class="fa-solid fa-pen-to-square"></i> Manage
+                                                        </button>
+                                                    </td>
                                                 </tr>
                                             `).join('')}
                                         </tbody>
@@ -569,24 +671,17 @@
                 `;
             },
 
-            editName: async () => {
-                const newName = prompt("Enter new display name:", app.currentUser.name);
-                if(newName && newName.trim() !== "") {
-                    try {
-                        const ref = doc(db, 'artifacts', appId, 'public', 'data', 'app_users', app.currentUser.schoolId);
-                        await updateDoc(ref, { name: newName.trim() });
-                        app.notify("Profile updated successfully.", "success");
-                    } catch (e) {
-                        console.error(e);
-                        app.notify("Error updating profile.", "error");
-                    }
-                }
-            },
-
+            // --- LOGIC / ACTIONS ---
             submitPayment: async (e) => {
                 e.preventDefault();
                 const amt = parseFloat(document.getElementById('pay-amt').value);
+                const method = document.getElementById('pay-method').value;
+                const ref = document.getElementById('pay-ref') ? document.getElementById('pay-ref').value : '';
+                const paidTo = document.getElementById('pay-to') ? document.getElementById('pay-to').value : '';
+
                 if(!amt || amt <= 0) return;
+                if(method === 'qr' && !ref) { app.notify("Please enter Reference Number", "error"); return; }
+                if(method === 'cash' && !paidTo) { app.notify("Please enter who received the cash", "error"); return; }
                 
                 try {
                     const txRef = collection(db, 'artifacts', appId, 'public', 'data', 'transactions');
@@ -596,11 +691,17 @@
                         amount: amt,
                         type: 'payment',
                         status: 'pending',
+                        method: method,
+                        reference: ref,
+                        paidTo: paidTo,
                         date: Date.now()
                     });
                     
                     document.getElementById('pay-amt').value = '';
-                    app.notify("Automated Email: Payment logged and sent to Admin for verification.", "email");
+                    if(document.getElementById('pay-ref')) document.getElementById('pay-ref').value = '';
+                    if(document.getElementById('pay-to')) document.getElementById('pay-to').value = '';
+                    
+                    app.notify("Automated Email: Payment logged and sent to Admin.", "email");
                 } catch(err) {
                     console.error(err);
                 }
@@ -609,7 +710,11 @@
             submitLoan: async (e) => {
                 e.preventDefault();
                 const amt = parseFloat(document.getElementById('loan-amt').value);
+                const months = parseInt(document.getElementById('loan-months').value);
+                const reason = document.getElementById('loan-reason').value;
+
                 if(!amt || amt <= 0) return;
+                if(!reason.trim()) { app.notify("Please provide a reason", "error"); return; }
 
                 try {
                     const txRef = collection(db, 'artifacts', appId, 'public', 'data', 'transactions');
@@ -617,49 +722,165 @@
                         schoolId: app.currentUser.schoolId,
                         userName: app.currentUser.name,
                         amount: amt,
+                        months: months,
+                        reason: reason,
                         type: 'loan_request',
                         status: 'pending',
                         date: Date.now()
                     });
                     
                     document.getElementById('loan-amt').value = '';
-                    app.notify("Automated Email: Loan request dispatched to Admin.", "email");
+                    document.getElementById('loan-reason').value = '';
+                    app.notify("Automated Email: Loan request dispatched.", "email");
                 } catch(err) {
                     console.error(err);
                 }
             },
 
-            approveAction: async (txId, type) => {
+            // DIRECT EDIT (MANUAL OVERRIDE BY ADMIN)
+            directEditUser: async (userId) => {
+                const user = app.users.find(u => u.schoolId === userId);
+                if(!user) return;
+                
+                const newBal = prompt(`Editing Balance for ${user.name}\nCurrent Balance: ₱${user.balance}\nEnter new Balance:`, user.balance);
+                if (newBal === null) return; // cancelled
+                
+                const newDue = prompt(`Editing Monthly Due for ${user.name}\nCurrent Due: ₱${user.monthlyDue}\nEnter new Monthly Due:`, user.monthlyDue);
+                if (newDue === null) return; // cancelled
+
+                try {
+                    const userRef = doc(db, 'artifacts', appId, 'public', 'data', 'app_users', userId);
+                    await updateDoc(userRef, { 
+                        balance: parseFloat(newBal),
+                        monthlyDue: parseFloat(newDue)
+                    });
+                    app.notify("User records forcefully updated.", "success");
+                } catch(e) {
+                    console.error(e);
+                    app.notify("Failed to update user.", "error");
+                }
+            },
+
+            // ADMIN MODAL LOGIC
+            openAdminModal: (txId) => {
+                const tx = app.transactions.find(t => t.id === txId);
+                const user = app.users.find(u => u.schoolId === tx.schoolId);
+                if (!tx || !user) return;
+                
+                app.processingTxId = txId;
+                const modal = document.getElementById('admin-modal');
+                
+                // Pre-calculate suggestions
+                let suggestedBal = user.balance;
+                let suggestedDue = user.monthlyDue;
+
+                if (tx.type === 'payment') {
+                    suggestedBal = Math.max(0, user.balance - tx.amount);
+                    if (suggestedBal <= 0) suggestedDue = 0; 
+                } else if (tx.type === 'loan_request') {
+                    suggestedBal = user.balance + tx.amount;
+                    suggestedDue = user.monthlyDue + (tx.amount / (tx.months || 1));
+                }
+
+                modal.innerHTML = `
+                    <div class="bg-white rounded-3xl shadow-2xl w-full max-w-lg overflow-hidden animate-[slideUpFade_0.3s_ease-out]">
+                        <div class="bg-slate-800 p-6 text-white flex justify-between items-center">
+                            <h3 class="font-bold text-xl flex items-center gap-2">
+                                <i class="fa-solid fa-sliders text-indigo-400"></i> Process Request
+                            </h3>
+                            <button onclick="app.closeAdminModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
+                        </div>
+                        <div class="p-8 space-y-6">
+                            <!-- Context Area -->
+                            <div class="bg-slate-50 border border-slate-200 rounded-2xl p-4">
+                                <p class="text-xs text-slate-500 uppercase font-bold tracking-wider mb-1">Request Details</p>
+                                <p class="font-semibold text-slate-800 text-lg mb-1">${user.name} 
+                                   <span class="text-sm font-normal text-slate-500">(${tx.type === 'payment' ? 'Payment' : 'Loan'})</span>
+                                </p>
+                                <p class="text-2xl font-black ${tx.type === 'payment' ? 'text-emerald-600' : 'text-indigo-600'}">${app.formatMoney(tx.amount)}</p>
+                                ${tx.type === 'loan_request' ? `<p class="text-sm text-slate-600 mt-2"><b>Reason:</b> ${tx.reason}</p><p class="text-sm text-slate-600"><b>Duration:</b> ${tx.months} Months</p>` : ''}
+                                ${tx.method === 'qr' ? `<p class="text-sm text-slate-600 mt-2"><b>QR Reference:</b> ${tx.reference}</p>` : ''}
+                                ${tx.method === 'cash' ? `<p class="text-sm text-slate-600 mt-2"><b>Paid Cash to:</b> ${tx.paidTo}</p>` : ''}
+                            </div>
+                            
+                            <!-- Editing Area -->
+                            <form id="admin-process-form" onsubmit="app.confirmAdminAction(event)">
+                                <div class="space-y-4">
+                                    <div>
+                                        <label class="block text-sm font-semibold text-slate-600 mb-1">Finalized Amount (₱)</label>
+                                        <input type="number" id="modal-amount" step="0.01" required value="${tx.amount}" class="w-full p-3 modern-input rounded-xl font-bold">
+                                        <p class="text-xs text-slate-400 mt-1">You can override the requested amount before saving.</p>
+                                    </div>
+                                    <div class="grid grid-cols-2 gap-4">
+                                        <div>
+                                            <label class="block text-sm font-semibold text-slate-600 mb-1">New Total Balance</label>
+                                            <input type="number" id="modal-bal" step="0.01" required value="${suggestedBal.toFixed(2)}" class="w-full p-3 modern-input rounded-xl text-slate-800">
+                                            <p class="text-[10px] text-slate-400 mt-1">Current: ₱${user.balance.toFixed(2)}</p>
+                                        </div>
+                                        <div>
+                                            <label class="block text-sm font-semibold text-slate-600 mb-1">New Monthly Due</label>
+                                            <input type="number" id="modal-due" step="0.01" required value="${suggestedDue.toFixed(2)}" class="w-full p-3 modern-input rounded-xl text-slate-800">
+                                            <p class="text-[10px] text-slate-400 mt-1">Current: ₱${user.monthlyDue.toFixed(2)}</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-8 flex gap-3">
+                                    <button type="button" onclick="app.closeAdminModal()" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-3 rounded-xl transition">Cancel</button>
+                                    <button type="submit" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl transition shadow-lg shadow-indigo-200">
+                                        <i class="fa-solid fa-check mr-1"></i> Approve & Save
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                `;
+                modal.classList.remove('hidden');
+            },
+
+            closeAdminModal: () => {
+                document.getElementById('admin-modal').classList.add('hidden');
+                app.processingTxId = null;
+            },
+
+            confirmAdminAction: async (e) => {
+                e.preventDefault();
+                const txId = app.processingTxId;
+                if(!txId) return;
+
                 const tx = app.transactions.find(t => t.id === txId);
                 const user = app.users.find(u => u.schoolId === tx.schoolId);
                 if (!tx || !user) return;
 
-                try {
-                    const txRef = doc(db, 'artifacts', appId, 'public', 'data', 'transactions', txId);
-                    await updateDoc(txRef, { status: 'approved' });
+                const finalAmt = parseFloat(document.getElementById('modal-amount').value);
+                const finalBal = parseFloat(document.getElementById('modal-bal').value);
+                const finalDue = parseFloat(document.getElementById('modal-due').value);
 
+                try {
+                    // Update Transaction
+                    const txRef = doc(db, 'artifacts', appId, 'public', 'data', 'transactions', txId);
+                    await updateDoc(txRef, { 
+                        status: 'approved',
+                        amount: finalAmt // Update it in case admin altered it
+                    });
+
+                    // Update User
                     const userRef = doc(db, 'artifacts', appId, 'public', 'data', 'app_users', tx.schoolId);
-                    if (type === 'payment') {
-                        const newBal = Math.max(0, user.balance - tx.amount);
-                        await updateDoc(userRef, { balance: newBal });
-                        app.notify(`Payment from ${user.name} verified.`, "success");
-                    } else if (type === 'loan_request') {
-                        const newBal = user.balance + tx.amount;
-                        const additionalMonthly = tx.amount / 2; // Assuming 2 months split
-                        await updateDoc(userRef, { 
-                            balance: newBal, 
-                            monthlyDue: user.monthlyDue + additionalMonthly 
-                        });
-                        app.notify(`Loan for ${user.name} approved.`, "success");
-                    }
-                } catch(e) {
-                    console.error(e);
-                    app.notify("Action failed to process.", "error");
+                    await updateDoc(userRef, { 
+                        balance: finalBal,
+                        monthlyDue: finalDue
+                    });
+                    
+                    app.closeAdminModal();
+                    app.notify(`${tx.type === 'payment' ? 'Payment' : 'Loan'} successfully processed!`, "success");
+                } catch(err) {
+                    console.error(err);
+                    app.notify("Failed to process transaction.", "error");
                 }
             }
         };
 
-        // --- Event Listeners for Forms ---
+        // --- AUTH & EVENT LISTENERS ---
         document.getElementById('login-form').addEventListener('submit', (e) => {
             e.preventDefault();
             const id = document.getElementById('login-id').value;
@@ -670,7 +891,7 @@
             if (user) {
                 errDiv.classList.add('hidden');
                 app.currentUser = user;
-                app.notify(`Welcome back, ${user.name.split(' ')[0]}`, "success");
+                app.notify(`Authentication successful.`, "success");
                 document.getElementById('login-form').reset();
                 app.switchView(user.role === 'admin' ? 'dashboard-admin' : 'dashboard-borrower');
             } else {
@@ -682,7 +903,9 @@
         document.getElementById('signup-form').addEventListener('submit', async (e) => {
             e.preventDefault();
             const id = document.getElementById('signup-id').value;
-            const name = document.getElementById('signup-name').value;
+            const fname = document.getElementById('signup-fname').value.trim();
+            const mname = document.getElementById('signup-mname').value.trim();
+            const lname = document.getElementById('signup-lname').value.trim();
             const pass = document.getElementById('signup-pass').value;
             const amtStr = document.getElementById('signup-amount').value;
             const errDiv = document.getElementById('signup-error');
@@ -693,7 +916,9 @@
                 return;
             }
 
-            const newUser = { schoolId: id, name, password: pass, role: 'borrower', balance: 0, monthlyDue: 0 };
+            // Construct full name
+            const fullName = `${fname} ${mname} ${lname}`.trim().replace(/\s+/g, ' ');
+            const newUser = { schoolId: id, name: fullName, password: pass, role: 'borrower', balance: 0, monthlyDue: 0 };
 
             try {
                 await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'app_users', id), newUser);
@@ -702,10 +927,12 @@
                     const txRef = collection(db, 'artifacts', appId, 'public', 'data', 'transactions');
                     await addDoc(txRef, {
                         schoolId: id,
-                        userName: name,
+                        userName: fullName,
                         amount: parseFloat(amtStr),
                         type: 'loan_request',
                         status: 'pending',
+                        reason: 'Initial setup request',
+                        months: 1, // Defaulting to 1 for initial signup if not specified
                         date: Date.now()
                     });
                 }
@@ -725,7 +952,6 @@
         // --- Init & Data Fetching ---
         const init = async () => {
             try {
-                // Initialize Firebase Auth Anonymously
                 await signInAnonymously(auth);
             } catch (e) { console.error("Auth:", e); }
 
@@ -733,7 +959,6 @@
                 if (!user) return;
                 app.firebaseUser = user;
 
-                // Subscribe to Users
                 const usersRef = collection(db, 'artifacts', appId, 'public', 'data', 'app_users');
                 onSnapshot(usersRef, (snap) => {
                     app.users = snap.docs.map(d => ({id: d.id, ...d.data()}));
@@ -748,7 +973,6 @@
                     
                 }, (error) => console.error("Firestore user error:", error));
 
-                // Subscribe to Transactions
                 const txRef = collection(db, 'artifacts', appId, 'public', 'data', 'transactions');
                 onSnapshot(txRef, (snap) => {
                     const data = snap.docs.map(d => ({id: d.id, ...d.data()}));
@@ -762,7 +986,6 @@
             app.renderNav();
         };
 
-        // Start App
         init();
 
     </script>

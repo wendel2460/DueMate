@@ -187,61 +187,84 @@
             </div>
         </section>
 
-        <!-- 2. Enhanced Login View -->
+        <!-- 2. Refined & Beautiful Login View -->
         <section id="view-login" class="view-section">
-            <div class="max-w-md mx-auto bg-white p-8 md:p-10 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-slate-100 mt-12 relative overflow-hidden">
-                <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-indigo-600 to-blue-500"></div>
-                
-                <div class="relative w-24 h-24 mx-auto mb-6">
-                    <div class="absolute inset-0 bg-indigo-500 rounded-full blur-xl opacity-20 animate-pulse"></div>
-                    <div class="relative w-full h-full rounded-2xl bg-gradient-to-tr from-indigo-600 to-blue-500 flex items-center justify-center shadow-lg shadow-indigo-200 rotate-3 transition-transform hover:rotate-6">
-                        <i class="fa-solid fa-fingerprint text-white text-4xl"></i>
+            <div class="max-w-4xl mx-auto bg-white rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-slate-100 mt-12 overflow-hidden flex flex-col md:flex-row">
+                <!-- Left Side: Visuals -->
+                <div class="md:w-1/2 bg-gradient-to-br from-indigo-600 to-blue-700 p-10 text-white flex flex-col justify-center relative overflow-hidden hidden md:flex">
+                    <div class="absolute -right-20 -top-20 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
+                    <div class="absolute -left-10 bottom-10 w-48 h-48 bg-blue-400/20 rounded-full blur-2xl"></div>
+                    
+                    <div class="relative z-10">
+                        <div class="w-16 h-16 rounded-2xl bg-white/10 backdrop-blur-md flex items-center justify-center border border-white/20 mb-6 shadow-xl">
+                            <i class="fa-solid fa-shield-halved text-3xl"></i>
+                        </div>
+                        <h2 class="text-4xl font-extrabold mb-4 tracking-tight">Welcome to<br>DueMate.</h2>
+                        <p class="text-indigo-100 text-lg mb-8 leading-relaxed">Securely access your personalized dashboard to manage your obligations, track payments, and request loans.</p>
+                        
+                        <div class="flex items-center gap-3 text-indigo-200 text-sm font-medium">
+                            <i class="fa-solid fa-lock"></i> <span>256-bit Encrypted Session</span>
+                        </div>
                     </div>
                 </div>
 
-                <h2 class="text-3xl font-extrabold text-center mb-2 text-slate-800 tracking-tight">Welcome Back</h2>
-                <p class="text-center text-slate-500 mb-8 text-sm">Enter your credentials to access your portal</p>
-                
-                <div id="login-error" class="hidden bg-red-50 border border-red-100 text-red-600 p-3 rounded-xl mb-6 text-sm text-center font-medium"></div>
-                
-                <form id="login-form" class="space-y-5">
-                    <div>
-                        <label class="block text-sm font-semibold text-slate-600 mb-1.5">School ID</label>
-                        <input type="text" id="login-id" required class="w-full p-4 modern-input rounded-xl text-base font-medium" placeholder="e.g. 20241618">
+                <!-- Right Side: Login Form -->
+                <div class="md:w-1/2 p-8 md:p-12 relative">
+                    <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-indigo-600 to-blue-500 md:hidden"></div>
+                    
+                    <div class="md:hidden flex justify-center mb-6">
+                        <div class="w-16 h-16 rounded-full bg-indigo-50 flex items-center justify-center text-indigo-600 text-2xl shadow-inner border border-indigo-100">
+                            <i class="fa-solid fa-shield-halved"></i>
+                        </div>
                     </div>
-                    <div>
-                        <label class="block text-sm font-semibold text-slate-600 mb-1.5">Password</label>
-                        <input type="password" id="login-pass" required class="w-full p-4 modern-input rounded-xl text-base font-medium" placeholder="••••••••">
+
+                    <h2 class="text-3xl font-extrabold text-slate-800 tracking-tight mb-2">Sign In</h2>
+                    <p class="text-slate-500 mb-8 text-sm">Enter your registered credentials below.</p>
+                    
+                    <div id="login-error" class="hidden bg-red-50 border border-red-100 text-red-600 p-3 rounded-xl mb-6 text-sm font-medium flex items-center gap-2">
+                        <i class="fa-solid fa-circle-exclamation"></i> <span>Invalid ID or Password.</span>
                     </div>
-                    <button type="submit" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-4 px-4 rounded-xl transition-colors shadow-lg shadow-slate-200 mt-4 flex items-center justify-center gap-2">
-                        <span>Secure Login</span> <i class="fa-solid fa-arrow-right"></i>
-                    </button>
-                </form>
+                    
+                    <form id="login-form" class="space-y-5">
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-600 mb-1.5">School ID</label>
+                            <input type="text" id="login-id" required class="w-full p-4 modern-input rounded-xl text-base font-medium" placeholder="e.g. 20241618">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-semibold text-slate-600 mb-1.5">Password</label>
+                            <input type="password" id="login-pass" required class="w-full p-4 modern-input rounded-xl text-base font-medium" placeholder="••••••••">
+                        </div>
+                        <button type="submit" class="w-full bg-slate-800 hover:bg-slate-900 text-white font-bold py-4 px-4 rounded-xl transition-all shadow-lg shadow-slate-300 mt-4 flex items-center justify-center gap-2 hover:-translate-y-0.5">
+                            <span>Authenticate Account</span> <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </form>
+                </div>
             </div>
         </section>
 
         <!-- 3. Enhanced Signup View -->
         <section id="view-signup" class="view-section">
-            <div class="max-w-md mx-auto bg-white p-8 md:p-10 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-slate-100 mt-12 relative overflow-hidden">
+            <div class="max-w-lg mx-auto bg-white p-8 md:p-10 rounded-3xl shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-slate-100 mt-12 relative overflow-hidden">
                 <div class="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-emerald-500 to-teal-500"></div>
                 <div class="flex justify-center mb-6">
                     <div class="w-20 h-20 rounded-2xl bg-emerald-50 flex items-center justify-center border border-emerald-100 text-emerald-500 text-3xl shadow-inner">
-                        <i class="fa-solid fa-id-card-clip"></i>
+                        <i class="fa-solid fa-user-check"></i>
                     </div>
                 </div>
                 <h2 class="text-2xl font-bold text-center mb-2 text-slate-800">Account Setup</h2>
-                <p class="text-center text-slate-500 mb-8 text-sm">Register your details accurately to proceed.</p>
+                <p class="text-center text-slate-500 mb-8 text-sm">Register your full details accurately to proceed.</p>
                 
                 <div id="signup-error" class="hidden bg-red-50 border border-red-100 text-red-600 p-3 rounded-xl mb-6 text-sm text-center font-medium"></div>
                 
                 <form id="signup-form" class="space-y-4">
                     <div>
-                        <label class="block text-sm font-medium text-slate-600 mb-1.5">School ID</label>
+                        <label class="block text-sm font-medium text-slate-600 mb-1.5">School ID <span class="text-red-500">*</span></label>
                         <input type="text" id="signup-id" required class="w-full p-3.5 modern-input rounded-xl text-base" placeholder="2024XXXX">
                     </div>
+                    
                     <div class="grid grid-cols-2 gap-4">
                         <div>
-                            <label class="block text-sm font-medium text-slate-600 mb-1.5">First Name</label>
+                            <label class="block text-sm font-medium text-slate-600 mb-1.5">First Name <span class="text-red-500">*</span></label>
                             <input type="text" id="signup-fname" required class="w-full p-3.5 modern-input rounded-xl text-base" placeholder="First">
                         </div>
                         <div>
@@ -249,15 +272,29 @@
                             <input type="text" id="signup-mname" class="w-full p-3.5 modern-input rounded-xl text-base" placeholder="(Optional)">
                         </div>
                     </div>
+                    
                     <div>
-                        <label class="block text-sm font-medium text-slate-600 mb-1.5">Last Name</label>
-                        <input type="text" id="signup-lname" required class="w-full p-3.5 modern-input rounded-xl text-base" placeholder="Last">
+                        <label class="block text-sm font-medium text-slate-600 mb-1.5">Last Name <span class="text-red-500">*</span></label>
+                        <input type="text" id="signup-lname" required class="w-full p-3.5 modern-input rounded-xl text-base" placeholder="Last Name">
                     </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-slate-600 mb-1.5">Mobile Number <span class="text-red-500">*</span></label>
+                            <input type="tel" id="signup-mobile" required class="w-full p-3.5 modern-input rounded-xl text-base" placeholder="09XXXXXXXXX">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-slate-600 mb-1.5">Email Address <span class="text-red-500">*</span></label>
+                            <input type="email" id="signup-email" required class="w-full p-3.5 modern-input rounded-xl text-base" placeholder="Email">
+                        </div>
+                    </div>
+                    
                     <div>
-                        <label class="block text-sm font-medium text-slate-600 mb-1.5">Default Password</label>
-                        <input type="text" id="signup-pass" required value="pass123" class="w-full p-3.5 modern-input rounded-xl text-base text-slate-400" readonly>
+                        <label class="block text-sm font-medium text-slate-600 mb-1.5">Create Password <span class="text-red-500">*</span></label>
+                        <input type="password" id="signup-pass" required class="w-full p-3.5 modern-input rounded-xl text-base" placeholder="Choose a secure password">
                     </div>
-                    <button type="submit" class="w-full mt-6 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 px-4 rounded-xl transition-colors shadow-lg shadow-emerald-200">
+                    
+                    <button type="submit" class="w-full mt-6 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-4 px-4 rounded-xl transition-all shadow-lg shadow-emerald-200 hover:-translate-y-0.5">
                         Register Account
                     </button>
                 </form>
@@ -278,6 +315,11 @@
 
     <!-- Modal Container for Admin Processing -->
     <div id="admin-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-slate-900/60 modal-overlay p-4">
+        <!-- Content injected via JS -->
+    </div>
+
+    <!-- Modal Container for Borrower Payment Submission -->
+    <div id="payment-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-slate-900/60 modal-overlay p-4">
         <!-- Content injected via JS -->
     </div>
 
@@ -310,6 +352,7 @@
             users: [],
             transactions: [],
             processingTxId: null, // Holds ID for admin review modal
+            pendingPayment: null, // Holds temp data before payment modal confirm
 
             formatMoney: (amount) => new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(amount || 0),
             obfuscate: (name) => {
@@ -409,27 +452,32 @@
             },
 
             // --- BORROWER DASHBOARD ---
-            togglePayMethod: () => {
-                const method = document.getElementById('pay-method').value;
-                document.getElementById('pay-qr-fields').style.display = method === 'qr' ? 'block' : 'none';
-                document.getElementById('pay-cash-fields').style.display = method === 'cash' ? 'block' : 'none';
-            },
 
             renderBorrowerDashboard: () => {
                 const container = document.getElementById('borrower-content');
                 const u = app.currentUser;
                 const myTx = app.transactions.filter(t => t.schoolId === u.schoolId);
 
-                // Date logic for forecast
+                // Date logic for forecast penalty
                 const today = new Date();
                 let dueMonth = today.getMonth();
                 let dueYear = today.getFullYear();
-                if (today.getDate() > 15) {
+                
+                // If past the 15th, calculate late days for current period
+                let daysLate = 0;
+                let penaltyEst = 0;
+                let isLate = false;
+                
+                if (today.getDate() > 15 && u.balance > 0) {
+                    isLate = true;
+                    daysLate = today.getDate() - 15;
+                    penaltyEst = daysLate * 20; // ₱20 per day
+                    
+                    // move due date tracker to next month for display
                     dueMonth++;
                     if(dueMonth > 11) { dueMonth = 0; dueYear++; }
                 }
                 const nextDueDate = new Date(dueYear, dueMonth, 15);
-                const isLate = today.getDate() > 15 && u.balance > 0;
 
                 container.innerHTML = `
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-10">
@@ -467,7 +515,13 @@
                                     <p class="font-bold text-lg">${nextDueDate.toLocaleDateString('en-US', {month: 'long', day:'numeric', year:'numeric'})}</p>
                                 </div>
                             </div>
-                            ${isLate ? `<p class="text-xs text-red-200 mt-2 font-medium bg-red-900/40 p-2 rounded-lg text-center"><i class="fa-solid fa-triangle-exclamation mr-1"></i> Late Penalty (+₱20/day) may be applying.</p>` : ''}
+                            ${isLate ? `
+                                <div class="mt-3 bg-red-900/60 p-3 rounded-xl border border-red-400/50 flex flex-col justify-center items-center shadow-inner">
+                                    <p class="text-xs text-red-100 font-bold mb-1 uppercase tracking-wide flex items-center gap-1"><i class="fa-solid fa-triangle-exclamation"></i> Overdue Estimate Penalty</p>
+                                    <p class="text-2xl font-black text-red-300">${app.formatMoney(penaltyEst)}</p>
+                                    <p class="text-[10px] text-red-200/80 mt-1">${daysLate} days late @ ₱20/day</p>
+                                </div>
+                            ` : ''}
                         </div>
 
                         <div class="lg:col-span-3 grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -478,23 +532,17 @@
                                         <i class="fa-solid fa-wallet text-lg"></i>
                                     </div>
                                     <h3 class="font-bold text-slate-800 text-lg mb-1">Make a Payment</h3>
-                                    <p class="text-sm text-slate-500 mb-5 leading-relaxed">Submit your payment details for admin verification.</p>
+                                    <p class="text-sm text-slate-500 mb-5 leading-relaxed">Submit your payment details. A popup will ask for the reference.</p>
                                 </div>
-                                <form onsubmit="app.submitPayment(event)" class="space-y-3">
+                                <form onsubmit="app.openPaymentModal(event)" class="space-y-3">
                                     <div class="flex gap-2">
-                                        <input type="number" id="pay-amt" required class="w-1/2 p-3 modern-input rounded-xl font-medium" placeholder="Amount (₱)">
-                                        <select id="pay-method" onchange="app.togglePayMethod()" class="w-1/2 p-3 modern-input rounded-xl font-medium cursor-pointer">
+                                        <input type="number" id="pay-amt" required step="0.01" class="w-1/2 p-3 modern-input rounded-xl font-medium" placeholder="Amount (₱)">
+                                        <select id="pay-method" class="w-1/2 p-3 modern-input rounded-xl font-medium cursor-pointer">
                                             <option value="qr">QR (GCash)</option>
                                             <option value="cash">Cash</option>
                                         </select>
                                     </div>
-                                    <div id="pay-qr-fields">
-                                        <input type="text" id="pay-ref" class="w-full p-3 modern-input rounded-xl font-medium text-sm" placeholder="GCash Ref. Number" required>
-                                    </div>
-                                    <div id="pay-cash-fields" style="display:none;">
-                                        <input type="text" id="pay-to" class="w-full p-3 modern-input rounded-xl font-medium text-sm" placeholder="Paid to whom? (Name)">
-                                    </div>
-                                    <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl font-bold transition shadow-sm mt-2">Submit Payment</button>
+                                    <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl font-bold transition shadow-sm mt-2">Proceed</button>
                                 </form>
                             </div>
 
@@ -505,10 +553,11 @@
                                         <i class="fa-solid fa-hand-holding-dollar text-lg"></i>
                                     </div>
                                     <h3 class="font-bold text-slate-800 text-lg mb-1">Request a Loan</h3>
+                                    <p class="text-sm text-slate-500 mb-5 leading-relaxed">Apply for an additional amount. Requires approval and agreement signing.</p>
                                 </div>
                                 <form onsubmit="app.submitLoan(event)" class="space-y-3 mt-4">
                                     <div class="flex gap-2">
-                                        <input type="number" id="loan-amt" required class="w-1/2 p-3 modern-input rounded-xl font-medium" placeholder="Amount (₱)">
+                                        <input type="number" id="loan-amt" required step="0.01" class="w-1/2 p-3 modern-input rounded-xl font-medium" placeholder="Amount (₱)">
                                         <select id="loan-months" class="w-1/2 p-3 modern-input rounded-xl font-medium cursor-pointer">
                                             <option value="1">1 Month</option>
                                             <option value="2">2 Months</option>
@@ -542,7 +591,7 @@
                                     <div class="text-right">
                                         <p class="font-extrabold text-slate-800 text-lg">${app.formatMoney(tx.amount)}</p>
                                         <span class="text-[10px] px-2.5 py-1 rounded-full uppercase tracking-widest font-bold mt-1 inline-block
-                                            ${tx.status === 'approved' ? 'bg-emerald-100 text-emerald-700' : 'bg-amber-100 text-amber-700'}">
+                                            ${tx.status === 'approved' ? 'bg-emerald-100 text-emerald-700' : (tx.status === 'declined' ? 'bg-red-100 text-red-700' : 'bg-amber-100 text-amber-700')}">
                                             ${tx.status}
                                         </span>
                                     </div>
@@ -557,7 +606,7 @@
             renderAdminDashboard: () => {
                 const container = document.getElementById('admin-content');
                 const pending = app.transactions.filter(t => t.status === 'pending');
-                const approved = app.transactions.filter(t => t.status === 'approved').slice(0, 10); // Show last 10
+                const past = app.transactions.filter(t => t.status === 'approved' || t.status === 'declined').slice(0, 10);
                 const borrowers = app.users.filter(u => u.role === 'borrower');
                 const totalOut = borrowers.reduce((sum, u) => sum + u.balance, 0);
 
@@ -611,17 +660,17 @@
                                 </div>
                             </div>
 
-                            <!-- Approved History -->
+                            <!-- Approved / Past History -->
                             <div>
-                                <h3 class="font-bold text-xl text-slate-800 flex items-center gap-2 mb-5"><i class="fa-solid fa-clock-rotate-left text-slate-400"></i> Recent Approvals</h3>
+                                <h3 class="font-bold text-xl text-slate-800 flex items-center gap-2 mb-5"><i class="fa-solid fa-clock-rotate-left text-slate-400"></i> Recent History</h3>
                                 <div class="bg-white rounded-3xl shadow-sm border border-slate-200 p-4 space-y-2">
-                                    ${approved.length === 0 ? '<p class="text-slate-400 text-sm text-center py-4">No history yet.</p>' : approved.map(tx => `
-                                        <div class="flex justify-between items-center p-3 hover:bg-slate-50 rounded-xl transition border-b border-slate-50 last:border-0">
+                                    ${past.length === 0 ? '<p class="text-slate-400 text-sm text-center py-4">No history yet.</p>' : past.map(tx => `
+                                        <div class="flex justify-between items-center p-3 hover:bg-slate-50 rounded-xl transition border-b border-slate-50 last:border-0 opacity-${tx.status === 'declined' ? '60' : '100'}">
                                             <div>
-                                                <p class="font-bold text-slate-700 text-sm">${tx.userName}</p>
-                                                <p class="text-[10px] text-slate-400 uppercase font-semibold">${tx.type} • ${new Date(tx.date).toLocaleDateString()}</p>
+                                                <p class="font-bold text-slate-700 text-sm ${tx.status === 'declined' ? 'line-through' : ''}">${tx.userName}</p>
+                                                <p class="text-[10px] text-slate-400 uppercase font-semibold">${tx.type} • ${tx.status} • ${new Date(tx.date).toLocaleDateString()}</p>
                                             </div>
-                                            <p class="font-bold ${tx.type === 'payment' ? 'text-emerald-600' : 'text-indigo-600'} text-sm">${app.formatMoney(tx.amount)}</p>
+                                            <p class="font-bold ${tx.type === 'payment' ? 'text-emerald-600' : 'text-indigo-600'} text-sm ${tx.status === 'declined' ? 'line-through' : ''}">${app.formatMoney(tx.amount)}</p>
                                         </div>
                                     `).join('')}
                                 </div>
@@ -672,17 +721,67 @@
             },
 
             // --- LOGIC / ACTIONS ---
-            submitPayment: async (e) => {
+            openPaymentModal: (e) => {
                 e.preventDefault();
                 const amt = parseFloat(document.getElementById('pay-amt').value);
                 const method = document.getElementById('pay-method').value;
-                const ref = document.getElementById('pay-ref') ? document.getElementById('pay-ref').value : '';
-                const paidTo = document.getElementById('pay-to') ? document.getElementById('pay-to').value : '';
 
                 if(!amt || amt <= 0) return;
-                if(method === 'qr' && !ref) { app.notify("Please enter Reference Number", "error"); return; }
-                if(method === 'cash' && !paidTo) { app.notify("Please enter who received the cash", "error"); return; }
                 
+                app.pendingPayment = { amt, method };
+                const modal = document.getElementById('payment-modal');
+
+                modal.innerHTML = `
+                    <div class="bg-white rounded-3xl shadow-2xl w-full max-w-sm overflow-hidden animate-[slideUpFade_0.3s_ease-out]">
+                        <div class="bg-slate-800 p-5 text-white flex justify-between items-center">
+                            <h3 class="font-bold text-lg flex items-center gap-2">
+                                <i class="fa-solid fa-wallet text-emerald-400"></i> Complete Payment
+                            </h3>
+                            <button onclick="app.closePaymentModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
+                        </div>
+                        <div class="p-6">
+                            <p class="text-center text-slate-500 text-sm mb-4">You are submitting a payment of <strong class="text-slate-800 text-lg">${app.formatMoney(amt)}</strong> via <strong>${method === 'qr' ? 'GCash QR' : 'Cash'}</strong>.</p>
+                            
+                            <form id="payment-confirm-form" onsubmit="app.confirmPayment(event)">
+                                ${method === 'qr' ? `
+                                    <div class="mb-5">
+                                        <label class="block text-sm font-semibold text-slate-600 mb-1.5 text-center">Enter GCash Reference No. <span class="text-red-500">*</span></label>
+                                        <input type="text" id="modal-pay-ref" required class="w-full p-3 modern-input rounded-xl text-center font-mono tracking-widest text-lg" placeholder="0000 000 0000">
+                                    </div>
+                                ` : `
+                                    <div class="mb-5">
+                                        <label class="block text-sm font-semibold text-slate-600 mb-1.5 text-center">Paid Cash To Whom? <span class="text-red-500">*</span></label>
+                                        <input type="text" id="modal-pay-to" required class="w-full p-3 modern-input rounded-xl text-center text-base" placeholder="Receiver's Name">
+                                    </div>
+                                `}
+                                
+                                <div class="flex gap-3">
+                                    <button type="button" onclick="app.closePaymentModal()" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-3 rounded-xl transition">Cancel</button>
+                                    <button type="submit" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition shadow-lg shadow-emerald-200">
+                                        <i class="fa-solid fa-paper-plane mr-1"></i> Send
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                `;
+                modal.classList.remove('hidden');
+            },
+
+            closePaymentModal: () => {
+                document.getElementById('payment-modal').classList.add('hidden');
+                app.pendingPayment = null;
+            },
+
+            confirmPayment: async (e) => {
+                e.preventDefault();
+                if(!app.pendingPayment) return;
+                const { amt, method } = app.pendingPayment;
+                
+                let ref = '', paidTo = '';
+                if (method === 'qr') ref = document.getElementById('modal-pay-ref').value;
+                if (method === 'cash') paidTo = document.getElementById('modal-pay-to').value;
+
                 try {
                     const txRef = collection(db, 'artifacts', appId, 'public', 'data', 'transactions');
                     await addDoc(txRef, {
@@ -698,12 +797,11 @@
                     });
                     
                     document.getElementById('pay-amt').value = '';
-                    if(document.getElementById('pay-ref')) document.getElementById('pay-ref').value = '';
-                    if(document.getElementById('pay-to')) document.getElementById('pay-to').value = '';
-                    
+                    app.closePaymentModal();
                     app.notify("Automated Email: Payment logged and sent to Admin.", "email");
                 } catch(err) {
                     console.error(err);
+                    app.notify("Error submitting payment.", "error");
                 }
             },
 
@@ -743,10 +841,10 @@
                 if(!user) return;
                 
                 const newBal = prompt(`Editing Balance for ${user.name}\nCurrent Balance: ₱${user.balance}\nEnter new Balance:`, user.balance);
-                if (newBal === null) return; // cancelled
+                if (newBal === null) return; 
                 
                 const newDue = prompt(`Editing Monthly Due for ${user.name}\nCurrent Due: ₱${user.monthlyDue}\nEnter new Monthly Due:`, user.monthlyDue);
-                if (newDue === null) return; // cancelled
+                if (newDue === null) return; 
 
                 try {
                     const userRef = doc(db, 'artifacts', appId, 'public', 'data', 'app_users', userId);
@@ -761,7 +859,29 @@
                 }
             },
 
-            // ADMIN MODAL LOGIC
+            // ADMIN MODAL LOGIC (With dynamic recalculation)
+            recalculateModal: () => {
+                const txId = app.processingTxId;
+                if(!txId) return;
+                const tx = app.transactions.find(t => t.id === txId);
+                const user = app.users.find(u => u.schoolId === tx.schoolId);
+                if (!tx || !user) return;
+
+                const inputAmt = parseFloat(document.getElementById('modal-amount').value) || 0;
+                
+                let newBal, newDue;
+                if (tx.type === 'payment') {
+                    newBal = Math.max(0, user.balance - inputAmt);
+                    newDue = newBal <= 0 ? 0 : user.monthlyDue; 
+                } else if (tx.type === 'loan_request') {
+                    newBal = user.balance + inputAmt;
+                    newDue = user.monthlyDue + (inputAmt / (tx.months || 1));
+                }
+
+                document.getElementById('modal-bal').value = newBal.toFixed(2);
+                document.getElementById('modal-due').value = newDue.toFixed(2);
+            },
+
             openAdminModal: (txId) => {
                 const tx = app.transactions.find(t => t.id === txId);
                 const user = app.users.find(u => u.schoolId === tx.schoolId);
@@ -808,27 +928,28 @@
                                 <div class="space-y-4">
                                     <div>
                                         <label class="block text-sm font-semibold text-slate-600 mb-1">Finalized Amount (₱)</label>
-                                        <input type="number" id="modal-amount" step="0.01" required value="${tx.amount}" class="w-full p-3 modern-input rounded-xl font-bold">
-                                        <p class="text-xs text-slate-400 mt-1">You can override the requested amount before saving.</p>
+                                        <input type="number" id="modal-amount" step="0.01" oninput="app.recalculateModal()" required value="${tx.amount}" class="w-full p-3 modern-input rounded-xl font-bold">
+                                        <p class="text-xs text-slate-400 mt-1">If you edit this amount, the balances below will recalculate.</p>
                                     </div>
                                     <div class="grid grid-cols-2 gap-4">
                                         <div>
                                             <label class="block text-sm font-semibold text-slate-600 mb-1">New Total Balance</label>
-                                            <input type="number" id="modal-bal" step="0.01" required value="${suggestedBal.toFixed(2)}" class="w-full p-3 modern-input rounded-xl text-slate-800">
-                                            <p class="text-[10px] text-slate-400 mt-1">Current: ₱${user.balance.toFixed(2)}</p>
+                                            <input type="number" id="modal-bal" step="0.01" required value="${suggestedBal.toFixed(2)}" class="w-full p-3 modern-input rounded-xl text-slate-800 bg-emerald-50 border-emerald-200 shadow-inner">
+                                            <p class="text-[10px] text-slate-400 mt-1 font-semibold">Current: ₱${user.balance.toFixed(2)}</p>
                                         </div>
                                         <div>
                                             <label class="block text-sm font-semibold text-slate-600 mb-1">New Monthly Due</label>
-                                            <input type="number" id="modal-due" step="0.01" required value="${suggestedDue.toFixed(2)}" class="w-full p-3 modern-input rounded-xl text-slate-800">
-                                            <p class="text-[10px] text-slate-400 mt-1">Current: ₱${user.monthlyDue.toFixed(2)}</p>
+                                            <input type="number" id="modal-due" step="0.01" required value="${suggestedDue.toFixed(2)}" class="w-full p-3 modern-input rounded-xl text-slate-800 bg-emerald-50 border-emerald-200 shadow-inner">
+                                            <p class="text-[10px] text-slate-400 mt-1 font-semibold">Current: ₱${user.monthlyDue.toFixed(2)}</p>
                                         </div>
                                     </div>
                                 </div>
                                 
                                 <div class="mt-8 flex gap-3">
-                                    <button type="button" onclick="app.closeAdminModal()" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-3 rounded-xl transition">Cancel</button>
-                                    <button type="submit" class="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl transition shadow-lg shadow-indigo-200">
-                                        <i class="fa-solid fa-check mr-1"></i> Approve & Save
+                                    <button type="button" onclick="app.closeAdminModal()" class="w-1/4 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-3 rounded-xl transition">Cancel</button>
+                                    <button type="button" onclick="app.declineAdminAction()" class="w-1/4 bg-red-100 hover:bg-red-200 text-red-700 font-bold py-3 rounded-xl transition">Decline</button>
+                                    <button type="submit" class="w-2/4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-3 rounded-xl transition shadow-lg shadow-indigo-200">
+                                        <i class="fa-solid fa-check mr-1"></i> Approve
                                     </button>
                                 </div>
                             </form>
@@ -841,6 +962,24 @@
             closeAdminModal: () => {
                 document.getElementById('admin-modal').classList.add('hidden');
                 app.processingTxId = null;
+            },
+
+            declineAdminAction: async () => {
+                const txId = app.processingTxId;
+                if(!txId) return;
+
+                if (!confirm("Are you sure you want to decline this request?")) return;
+
+                try {
+                    const txRef = doc(db, 'artifacts', appId, 'public', 'data', 'transactions', txId);
+                    await updateDoc(txRef, { status: 'declined' });
+                    
+                    app.closeAdminModal();
+                    app.notify("Request has been declined.", "error");
+                } catch(err) {
+                    console.error(err);
+                    app.notify("Failed to decline transaction.", "error");
+                }
             },
 
             confirmAdminAction: async (e) => {
@@ -857,14 +996,12 @@
                 const finalDue = parseFloat(document.getElementById('modal-due').value);
 
                 try {
-                    // Update Transaction
                     const txRef = doc(db, 'artifacts', appId, 'public', 'data', 'transactions', txId);
                     await updateDoc(txRef, { 
                         status: 'approved',
-                        amount: finalAmt // Update it in case admin altered it
+                        amount: finalAmt 
                     });
 
-                    // Update User
                     const userRef = doc(db, 'artifacts', appId, 'public', 'data', 'app_users', tx.schoolId);
                     await updateDoc(userRef, { 
                         balance: finalBal,
@@ -895,7 +1032,6 @@
                 document.getElementById('login-form').reset();
                 app.switchView(user.role === 'admin' ? 'dashboard-admin' : 'dashboard-borrower');
             } else {
-                errDiv.textContent = "Invalid ID or Password.";
                 errDiv.classList.remove('hidden');
             }
         });
@@ -906,8 +1042,9 @@
             const fname = document.getElementById('signup-fname').value.trim();
             const mname = document.getElementById('signup-mname').value.trim();
             const lname = document.getElementById('signup-lname').value.trim();
+            const mobile = document.getElementById('signup-mobile').value.trim();
+            const email = document.getElementById('signup-email').value.trim();
             const pass = document.getElementById('signup-pass').value;
-            const amtStr = document.getElementById('signup-amount').value;
             const errDiv = document.getElementById('signup-error');
 
             if (app.users.find(u => u.schoolId === id)) {
@@ -916,27 +1053,21 @@
                 return;
             }
 
-            // Construct full name
             const fullName = `${fname} ${mname} ${lname}`.trim().replace(/\s+/g, ' ');
-            const newUser = { schoolId: id, name: fullName, password: pass, role: 'borrower', balance: 0, monthlyDue: 0 };
+            const newUser = { 
+                schoolId: id, 
+                name: fullName, 
+                mobile: mobile,
+                email: email,
+                password: pass, 
+                role: 'borrower', 
+                balance: 0, 
+                monthlyDue: 0 
+            };
 
             try {
                 await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'app_users', id), newUser);
                 
-                if (amtStr && parseFloat(amtStr) > 0) {
-                    const txRef = collection(db, 'artifacts', appId, 'public', 'data', 'transactions');
-                    await addDoc(txRef, {
-                        schoolId: id,
-                        userName: fullName,
-                        amount: parseFloat(amtStr),
-                        type: 'loan_request',
-                        status: 'pending',
-                        reason: 'Initial setup request',
-                        months: 1, // Defaulting to 1 for initial signup if not specified
-                        date: Date.now()
-                    });
-                }
-
                 app.currentUser = newUser;
                 errDiv.classList.add('hidden');
                 document.getElementById('signup-form').reset();

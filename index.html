@@ -318,11 +318,6 @@
         <!-- Content injected via JS -->
     </div>
 
-    <!-- Modal Container for Borrower Payment Submission -->
-    <div id="payment-modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center bg-slate-900/60 modal-overlay p-4">
-        <!-- Content injected via JS -->
-    </div>
-
     <!-- App Logic -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
@@ -352,7 +347,6 @@
             users: [],
             transactions: [],
             processingTxId: null, // Holds ID for admin review modal
-            pendingPayment: null, // Holds temp data before payment modal confirm
 
             formatMoney: (amount) => new Intl.NumberFormat('en-PH', { style: 'currency', currency: 'PHP' }).format(amount || 0),
             obfuscate: (name) => {
@@ -452,6 +446,34 @@
             },
 
             // --- BORROWER DASHBOARD ---
+            togglePayMethod: () => {
+                const method = document.getElementById('pay-method').value;
+                const qrContainer = document.getElementById('qr-image-container');
+                const cashFields = document.getElementById('cash-fields');
+                const qrFields = document.getElementById('qr-fields');
+                
+                const payDate = document.getElementById('pay-date');
+                const payTo = document.getElementById('pay-to');
+                const payRef = document.getElementById('pay-ref');
+
+                if (method === 'qr') {
+                    qrContainer.classList.remove('hidden');
+                    qrFields.classList.remove('hidden');
+                    cashFields.classList.add('hidden');
+                    
+                    payRef.required = true;
+                    payDate.required = false;
+                    payTo.required = false;
+                } else {
+                    qrContainer.classList.add('hidden');
+                    qrFields.classList.add('hidden');
+                    cashFields.classList.remove('hidden');
+                    
+                    payRef.required = false;
+                    payDate.required = true;
+                    payTo.required = true;
+                }
+            },
 
             renderBorrowerDashboard: () => {
                 const container = document.getElementById('borrower-content');
@@ -532,17 +554,33 @@
                                         <i class="fa-solid fa-wallet text-lg"></i>
                                     </div>
                                     <h3 class="font-bold text-slate-800 text-lg mb-1">Make a Payment</h3>
-                                    <p class="text-sm text-slate-500 mb-5 leading-relaxed">Submit your payment details. A popup will ask for the reference.</p>
+                                    <p class="text-sm text-slate-500 mb-5 leading-relaxed">Submit your payment details. Provide reference or cash details.</p>
                                 </div>
-                                <form onsubmit="app.openPaymentModal(event)" class="space-y-3">
-                                    <div class="flex gap-2">
-                                        <input type="number" id="pay-amt" required step="0.01" class="w-1/2 p-3 modern-input rounded-xl font-medium" placeholder="Amount (₱)">
-                                        <select id="pay-method" class="w-1/2 p-3 modern-input rounded-xl font-medium cursor-pointer">
-                                            <option value="qr">QR (GCash)</option>
-                                            <option value="cash">Cash</option>
-                                        </select>
+                                <form onsubmit="app.submitPayment(event)" class="space-y-3">
+                                    <select id="pay-method" onchange="app.togglePayMethod()" class="w-full p-3 modern-input rounded-xl font-medium cursor-pointer">
+                                        <option value="cash" selected>Cash</option>
+                                        <option value="qr">QR (Maribank)</option>
+                                    </select>
+                                    
+                                    <div id="qr-image-container" class="hidden mb-2 flex justify-center">
+                                        <img src="ReactNative-snapshot-image5588590767599226962.png" alt="QR Code" class="w-full max-w-[200px] h-auto rounded-xl shadow-md border border-slate-200">
                                     </div>
-                                    <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl font-bold transition shadow-sm mt-2">Proceed</button>
+
+                                    <input type="number" id="pay-amt" required step="0.01" class="w-full p-3 modern-input rounded-xl font-medium" placeholder="Amount (₱)">
+
+                                    <div id="cash-fields" class="space-y-3">
+                                        <div>
+                                            <label class="block text-xs font-semibold text-slate-500 mb-1 ml-1">When did you give it?</label>
+                                            <input type="date" id="pay-date" required class="w-full p-3 modern-input rounded-xl font-medium text-sm text-slate-600">
+                                        </div>
+                                        <input type="text" id="pay-to" required class="w-full p-3 modern-input rounded-xl font-medium text-sm" placeholder="Paid to whom? (Name)">
+                                    </div>
+
+                                    <div id="qr-fields" class="hidden space-y-3">
+                                        <input type="text" id="pay-ref" class="w-full p-3 modern-input rounded-xl font-medium text-sm" placeholder="Reference Number">
+                                    </div>
+
+                                    <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-xl font-bold transition shadow-sm mt-2">Submit Payment</button>
                                 </form>
                             </div>
 
@@ -584,7 +622,7 @@
                                             <p class="font-bold text-slate-800">${tx.type === 'payment' ? 'Payment Submitted' : 'Loan Requested'}</p>
                                             <p class="text-xs font-medium text-slate-500 mt-0.5 mb-1">${new Date(tx.date).toLocaleString([], {month: 'short', day: 'numeric', hour: '2-digit', minute:'2-digit'})}</p>
                                             ${tx.method === 'qr' ? `<span class="text-[10px] bg-slate-200 text-slate-600 px-2 py-0.5 rounded font-mono">Ref: ${tx.reference}</span>` : ''}
-                                            ${tx.method === 'cash' ? `<span class="text-[10px] bg-slate-200 text-slate-600 px-2 py-0.5 rounded font-mono">Cash to: ${tx.paidTo}</span>` : ''}
+                                            ${tx.method === 'cash' ? `<span class="text-[10px] bg-slate-200 text-slate-600 px-2 py-0.5 rounded font-mono">Cash to: ${tx.paidTo} (${tx.paidDate || 'N/A'})</span>` : ''}
                                             ${tx.months ? `<span class="text-[10px] bg-indigo-100 text-indigo-600 px-2 py-0.5 rounded font-bold">${tx.months} Mos.</span>` : ''}
                                         </div>
                                     </div>
@@ -647,7 +685,7 @@
                                                 <p class="text-xs font-semibold uppercase tracking-wider text-slate-500 mt-1 mb-2">${tx.type === 'payment' ? 'Payment Validation' : 'Loan Request'}</p>
                                                 ${tx.type === 'loan_request' ? `<p class="text-xs text-slate-600 italic border-l-2 border-indigo-200 pl-2">"${tx.reason || 'No reason'}"</p>` : ''}
                                                 ${tx.method === 'qr' ? `<p class="text-xs text-slate-600 font-mono mt-1">Ref: ${tx.reference}</p>` : ''}
-                                                ${tx.method === 'cash' ? `<p class="text-xs text-slate-600 mt-1">Cash to: ${tx.paidTo}</p>` : ''}
+                                                ${tx.method === 'cash' ? `<p class="text-xs text-slate-600 mt-1">Cash to: ${tx.paidTo} <span class="text-slate-400">(${tx.paidDate || 'No date'})</span></p>` : ''}
                                             </div>
                                             <p class="font-black text-xl ${tx.type === 'payment' ? 'text-emerald-600' : 'text-indigo-600'}">${app.formatMoney(tx.amount)}</p>
                                         </div>
@@ -721,67 +759,24 @@
             },
 
             // --- LOGIC / ACTIONS ---
-            openPaymentModal: (e) => {
+            submitPayment: async (e) => {
                 e.preventDefault();
                 const amt = parseFloat(document.getElementById('pay-amt').value);
                 const method = document.getElementById('pay-method').value;
+                let ref = '', paidTo = '', payDateStr = '';
 
                 if(!amt || amt <= 0) return;
+
+                if (method === 'qr') {
+                    ref = document.getElementById('pay-ref').value;
+                    if(!ref) { app.notify("Please enter Reference Number", "error"); return; }
+                } else {
+                    paidTo = document.getElementById('pay-to').value;
+                    payDateStr = document.getElementById('pay-date').value;
+                    if(!paidTo) { app.notify("Please enter who received the cash", "error"); return; }
+                    if(!payDateStr) { app.notify("Please enter the date given", "error"); return; }
+                }
                 
-                app.pendingPayment = { amt, method };
-                const modal = document.getElementById('payment-modal');
-
-                modal.innerHTML = `
-                    <div class="bg-white rounded-3xl shadow-2xl w-full max-w-sm overflow-hidden animate-[slideUpFade_0.3s_ease-out]">
-                        <div class="bg-slate-800 p-5 text-white flex justify-between items-center">
-                            <h3 class="font-bold text-lg flex items-center gap-2">
-                                <i class="fa-solid fa-wallet text-emerald-400"></i> Complete Payment
-                            </h3>
-                            <button onclick="app.closePaymentModal()" class="text-slate-400 hover:text-white"><i class="fa-solid fa-xmark text-xl"></i></button>
-                        </div>
-                        <div class="p-6">
-                            <p class="text-center text-slate-500 text-sm mb-4">You are submitting a payment of <strong class="text-slate-800 text-lg">${app.formatMoney(amt)}</strong> via <strong>${method === 'qr' ? 'GCash QR' : 'Cash'}</strong>.</p>
-                            
-                            <form id="payment-confirm-form" onsubmit="app.confirmPayment(event)">
-                                ${method === 'qr' ? `
-                                    <div class="mb-5">
-                                        <label class="block text-sm font-semibold text-slate-600 mb-1.5 text-center">Enter GCash Reference No. <span class="text-red-500">*</span></label>
-                                        <input type="text" id="modal-pay-ref" required class="w-full p-3 modern-input rounded-xl text-center font-mono tracking-widest text-lg" placeholder="0000 000 0000">
-                                    </div>
-                                ` : `
-                                    <div class="mb-5">
-                                        <label class="block text-sm font-semibold text-slate-600 mb-1.5 text-center">Paid Cash To Whom? <span class="text-red-500">*</span></label>
-                                        <input type="text" id="modal-pay-to" required class="w-full p-3 modern-input rounded-xl text-center text-base" placeholder="Receiver's Name">
-                                    </div>
-                                `}
-                                
-                                <div class="flex gap-3">
-                                    <button type="button" onclick="app.closePaymentModal()" class="flex-1 bg-slate-100 hover:bg-slate-200 text-slate-700 font-bold py-3 rounded-xl transition">Cancel</button>
-                                    <button type="submit" class="flex-1 bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3 rounded-xl transition shadow-lg shadow-emerald-200">
-                                        <i class="fa-solid fa-paper-plane mr-1"></i> Send
-                                    </button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                `;
-                modal.classList.remove('hidden');
-            },
-
-            closePaymentModal: () => {
-                document.getElementById('payment-modal').classList.add('hidden');
-                app.pendingPayment = null;
-            },
-
-            confirmPayment: async (e) => {
-                e.preventDefault();
-                if(!app.pendingPayment) return;
-                const { amt, method } = app.pendingPayment;
-                
-                let ref = '', paidTo = '';
-                if (method === 'qr') ref = document.getElementById('modal-pay-ref').value;
-                if (method === 'cash') paidTo = document.getElementById('modal-pay-to').value;
-
                 try {
                     const txRef = collection(db, 'artifacts', appId, 'public', 'data', 'transactions');
                     await addDoc(txRef, {
@@ -793,11 +788,15 @@
                         method: method,
                         reference: ref,
                         paidTo: paidTo,
+                        paidDate: payDateStr,
                         date: Date.now()
                     });
                     
                     document.getElementById('pay-amt').value = '';
-                    app.closePaymentModal();
+                    if(document.getElementById('pay-ref')) document.getElementById('pay-ref').value = '';
+                    if(document.getElementById('pay-to')) document.getElementById('pay-to').value = '';
+                    if(document.getElementById('pay-date')) document.getElementById('pay-date').value = '';
+                    
                     app.notify("Automated Email: Payment logged and sent to Admin.", "email");
                 } catch(err) {
                     console.error(err);
@@ -920,7 +919,7 @@
                                 <p class="text-2xl font-black ${tx.type === 'payment' ? 'text-emerald-600' : 'text-indigo-600'}">${app.formatMoney(tx.amount)}</p>
                                 ${tx.type === 'loan_request' ? `<p class="text-sm text-slate-600 mt-2"><b>Reason:</b> ${tx.reason}</p><p class="text-sm text-slate-600"><b>Duration:</b> ${tx.months} Months</p>` : ''}
                                 ${tx.method === 'qr' ? `<p class="text-sm text-slate-600 mt-2"><b>QR Reference:</b> ${tx.reference}</p>` : ''}
-                                ${tx.method === 'cash' ? `<p class="text-sm text-slate-600 mt-2"><b>Paid Cash to:</b> ${tx.paidTo}</p>` : ''}
+                                ${tx.method === 'cash' ? `<p class="text-sm text-slate-600 mt-2"><b>Paid Cash to:</b> ${tx.paidTo}</p><p class="text-sm text-slate-600 mt-1"><b>Date Given:</b> ${tx.paidDate || 'N/A'}</p>` : ''}
                             </div>
                             
                             <!-- Editing Area -->
@@ -1080,7 +1079,7 @@
             }
         });
 
-        // --- Init & Data Fetching ---
+        // --- Init & Data FeGoodtching ---
         const init = async () => {
             try {
                 await signInAnonymously(auth);
